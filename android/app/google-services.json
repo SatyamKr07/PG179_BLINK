@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "811030453538",
+    "firebase_url": "https://ghats-59362.firebaseio.com",
+    "project_id": "ghats-59362",
+    "storage_bucket": "ghats-59362.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811030453538:android:e31db647fd3435c247197b",
+        "android_client_info": {
+          "package_name": "com.example.maps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811030453538-vhb2kq6cn92up9mi0t17enhdv0h6he23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfJ-SnUPwRN0WlTxoKWNZwIjv5WiL4Mdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811030453538-vhb2kq6cn92up9mi0t17enhdv0h6he23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
