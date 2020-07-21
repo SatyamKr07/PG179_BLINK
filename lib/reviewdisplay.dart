@@ -4,11 +4,9 @@ import './locprovider.dart';
 import 'package:provider/provider.dart';
 
 class Storyline extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    final placedata=Provider.of<Places>(context,listen: false);
+    final placedata = Provider.of<Places>(context, listen: false);
     var theme = Theme.of(context);
     var textTheme = Theme.of(context).textTheme;
 
@@ -33,9 +31,11 @@ class Storyline extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              AppTranslations.of(context).text("Seemorereviews"),
-              style: TextStyle(fontSize: 18,color: Colors.blue,fontWeight: FontWeight.bold)),
+            Text(AppTranslations.of(context).text("Seemorereviews"),
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold)),
             Icon(
               Icons.keyboard_arrow_down,
               size: 18.0,
