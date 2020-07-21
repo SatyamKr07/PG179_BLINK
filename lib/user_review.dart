@@ -73,6 +73,7 @@ class _UserReviewState extends State<UserReview> {
         ),
         doesThisGhatHas("1. Dustbin"),
         doesThisGhatHas("2. Toilet"),
+        doesThisGhatHas("3. Cremation"),
         SizedBox(height: 20),
         othersReview(),
       ],
