@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
 import './Details.dart';
@@ -42,7 +43,7 @@ class RatingInformation extends StatelessWidget {
         ),
         SizedBox(height: 4.0),
         Text(
-          'Ratings',
+          AppTranslations.of(context).text("ratings"),
           style: ratingCaptionStyle,
         ),
       ],

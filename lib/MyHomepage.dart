@@ -1,15 +1,17 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:maps/AppTranslation.dart';
+import 'package:maps/Application.dart';
 import 'package:maps/location.dart';
 import 'package:maps/main.dart';
 import './AppDrawer.dart';
+import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
 import './Ghatitem.dart';
 import 'package:geolocator/geolocator.dart';
 import './location.dart';
-import './Userclass.dart';
 class MyHomePage extends StatefulWidget {
   String id;
   MyHomePage(this.id);
@@ -20,6 +22,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double lat;
   double long;
+  static final List<String> languagesList = application.supportedLanguages;
+  static final List<String> languageCodesList =
+      application.supportedLanguagesCodes;
+
+  final Map<dynamic, dynamic> languagesMap = {
+    languagesList[0]: languageCodesList[0],
+    languagesList[1]: languageCodesList[1],
+  };
+
+  String label = languagesList[0];
   final _scaffoldkey=GlobalKey<ScaffoldState>();
   FirebaseMessaging firebasemessaging=FirebaseMessaging();
   final googlesignin=GoogleSignIn();
@@ -27,6 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
    void location() async
   {
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    AuthGoogle authGoogle = await AuthGoogle(fileJson: "assets/rithik-agarwal-scdsos-524ab5e63522.json").build();
+  Dialogflow dialogflow = Dialogflow(authGoogle: authGoogle,language: Language.ENGLISH);
+  AIResponse response = await dialogflow.detectIntent("blue");
+  print(response.getListMessage());
+
     
     setState(() {
         lat=position.latitude;
@@ -41,8 +58,27 @@ void initState()
   super.initState();
   location();
   configurepush();
+   application.onLocaleChanged = onLocaleChange;
+    onLocaleChange(Locale(languagesMap["Hindi"]));
 
 }
+ void onLocaleChange(Locale locale) async {
+    setState(() {
+      AppTranslations.load(locale);
+    });
+  }
+  
+  void _select(String language) {
+    print("dd "+language);
+    onLocaleChange(Locale(languagesMap[language]));
+    setState(() {
+      if (language == "Hindi") {
+        label = "हिंदी";
+      } else {
+        label = language;
+      }
+    });
+  }
 void configurepush()
 {
   firebasemessaging.configure(
@@ -77,7 +113,7 @@ void configurepush()
       key: _scaffoldkey,
       drawer: (lat != null && placedata.user != null) ? AppDrawer(placedata.user):Container(),
       appBar: AppBar(
-       title: Text('Ghats near your location'),
+       title: Text(AppTranslations.of(context).text("appbar_title")),
         actions: <Widget>[
         PopupMenuButton(
           onSelected: (int val) {
@@ -93,11 +129,25 @@ void configurepush()
           icon: Icon(Icons.more_vert),itemBuilder: (_)
           => [PopupMenuItem(child: Text('Logout'),value: 0,),],
         ),
+         PopupMenuButton<String>(
+              // overflow menu
+              onSelected: _select,
+              icon: new Icon(Icons.language, color: Colors.white),
+              itemBuilder: (BuildContext context) {
+                return languagesList
+                    .map<PopupMenuItem<String>>((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
         ],
       ),
       body:(lat != null && placedata.items.length != 0) ? 
        GridView.builder(
-padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         itemCount: placedata.items.length,
         itemBuilder: (ctx,i) => Ghatitem(placedata.items[i].name,placedata.items[i].imagelink,placedata.items[i].rating.toString(),placedata.items[i].id),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,childAspectRatio: 3/2,crossAxisSpacing: 10,mainAxisSpacing: 10),

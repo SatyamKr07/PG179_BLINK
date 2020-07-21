@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_map_polyline/google_map_polyline.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:maps/Application.dart';
 import './locprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart' as http;
@@ -169,9 +170,9 @@ Widget myDetails(String name,String rating,double lat,double long)
       ]
     ),),
     SizedBox(height: 5.0,),
-    Text('Closed open at 17:00 thu',style: TextStyle(color: Colors.black54,
+    Text(AppTranslations.of(context).text("timings"),style: TextStyle(color: Colors.black54,
     fontSize: 18.0,fontWeight: FontWeight.bold),),
-    FlatButton(child: Text('Get The Route',style: TextStyle(color: Colors.blueAccent,fontSize: 18.0,fontWeight:FontWeight.normal)),onPressed: () => getpoints(lat, long),)
+    FlatButton(child: Text(AppTranslations.of(context).text("Gettheroute"),style: TextStyle(color: Colors.blueAccent,fontSize: 18.0,fontWeight:FontWeight.normal)),onPressed: () => getpoints(lat, long),)
    
     
   ],);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import './locprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class PhotoScroller extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
-            'Photos',
+            AppTranslations.of(context).text("photos"),
             style: TextStyle(fontSize: 18.0,color: Colors.black54),
           ),
         ),

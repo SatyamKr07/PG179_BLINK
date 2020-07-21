@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:maps/Userclass.dart';
 import 'package:provider/provider.dart';
 import './Animation.dart';
@@ -23,7 +24,7 @@ class _EventRegisterState extends State<EventRegister> {
     User user=placedata.user;
     list=d['registered'];
     print(list);
-    return Scaffold(appBar: AppBar(title: Text('Event Details'),),body:ListView(
+    return Scaffold(appBar: AppBar(title: Text(AppTranslations.of(context).text("Event_details")),),body:ListView(
       children: <Widget>[
          Container(
 	        child: Column(
@@ -37,7 +38,7 @@ class _EventRegisterState extends State<EventRegister> {
 	                    child: FadeAnimation(1.6, Container(
 	                    margin: EdgeInsets.only(top: 50),
 	                      child: Center(
-	                        child: Text("Register event", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+	                        child: Text(AppTranslations.of(context).text(AppTranslations.of(context).text("Register_Event")), style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
 	                      ),
 	                    )),
 	                  )
@@ -50,39 +51,39 @@ class _EventRegisterState extends State<EventRegister> {
     ),
     Divider(),
     Row(children: <Widget>[
-      Text('Name: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("name"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['name'],style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
     Row(children: <Widget>[
-      Text('Phone number: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("phone_number"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['number'],style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
     Row(children: <Widget>[
-      Text('Date: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("Date"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['Date'],style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
      Row(children: <Widget>[
-      Text('Time: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("time"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['time'],style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
      Row(children: <Widget>[
-      Text('Description: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("Description"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['description'],style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
     Row(children: <Widget>[
-      Text('Viewed By: ',style: TextStyle(fontSize: 18,color: Colors.black87),),
+      Text(AppTranslations.of(context).text("Viewed_by"),style: TextStyle(fontSize: 18,color: Colors.black87),),
       Text(d['views'].toString(),style: TextStyle(fontSize: 18,color: Colors.black54),)
     ],),
     Divider(),
     (!list.contains(user.userid)) ? RaisedButton(child: Container(height: 30,
     width: double.infinity,
     color: Colors.blueAccent,
-    child:Center(child:Text('Register')),
+    child:Center(child:Text(AppTranslations.of(context).text("Register"))),
     ),
     onPressed: () => register(placedata.user),
    
@@ -90,7 +91,7 @@ class _EventRegisterState extends State<EventRegister> {
    RaisedButton(child: Container(height: 30,
     width: double.infinity,
     color: Colors.redAccent,
-    child:Center(child:Text('Unregister')),
+    child:Center(child:Text(AppTranslations.of(context).text("Unregister"))),
     ),
     onPressed: () => unregister(),
    
@@ -112,8 +113,13 @@ class _EventRegisterState extends State<EventRegister> {
     'id':u.userid,
     'image':u.photourl}])});
 
-    DocumentSnapshot d2=await Firestore.instance.collection('Users').document(d['ownerid']).get();
-    d2.reference.updateData({'feeds':FieldValue.arrayUnion(['${u.username} has registered for your event in ${d['GhatName']}'])});
+    Firestore.instance.collection('Feeds').document(d['ownerid']).collection(d["postid"]).document(DateTime.now().millisecond.toString()).setData({
+      "text":"${u.username} has registered for your event in ${d['GhatName']}",
+      "timestamp":DateTime.now().toString(),
+      "photourl":u.photourl,
+      "userid":u.userid,
+
+    });
     DocumentSnapshot d3=await Firestore.instance.collection('Users').document(u.userid).get();
     d3.reference.updateData({'points':FieldValue.increment(20)});
     placedata.setUser(u.userid);

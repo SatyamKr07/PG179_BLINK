@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
 import './Animation.dart';
@@ -78,7 +79,7 @@ class _EventPageState extends State<EventPage> {
     ghatname=placedata.d.name;
     photoreference=placedata.d.photos[0]['photo_reference'];
     return Scaffold(
-      appBar: AppBar(title: Text('Register Event')
+      appBar: AppBar(title: Text(AppTranslations.of(context).text("Register_Event"))
       ),
       body:SingleChildScrollView(
       	child: Container(
@@ -93,7 +94,7 @@ class _EventPageState extends State<EventPage> {
 	                    child: FadeAnimation(1.6, Container(
 	                    margin: EdgeInsets.only(top: 50),
 	                      child: Center(
-	                        child: Text("Register event", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+	                        child: Text(AppTranslations.of(context).text("Register_Event"), style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
 	                      ),
 	                    )),
 	                  )
@@ -128,7 +129,7 @@ class _EventPageState extends State<EventPage> {
                               controller:number,
 	                            decoration: InputDecoration(
 	                              border: InputBorder.none,
-	                              hintText: "Phone number",
+	                              hintText: AppTranslations.of(context).text("phone_number"),
                                 
 	                              hintStyle: TextStyle(color: Colors.grey[400])
 	                            ),
@@ -140,7 +141,7 @@ class _EventPageState extends State<EventPage> {
                               controller: name,
 	                            decoration: InputDecoration(
 	                              border: InputBorder.none,
-	                              hintText: "Name",
+	                              hintText: AppTranslations.of(context).text("name"),
 	                              hintStyle: TextStyle(color: Colors.grey[400])
 	                            ),
 	                          ),
@@ -151,7 +152,7 @@ class _EventPageState extends State<EventPage> {
                               controller: date,
 	                            decoration: InputDecoration(
 	                              border: InputBorder.none,
-	                              hintText: "Date",
+	                              hintText: AppTranslations.of(context).text("Date"),
 	                              hintStyle: TextStyle(color: Colors.grey[400])
 	                            ),
 	                          ),
@@ -162,7 +163,7 @@ class _EventPageState extends State<EventPage> {
                               controller: time,
 	                            decoration: InputDecoration(
 	                              border: InputBorder.none,
-	                              hintText: "Time of the event",
+	                              hintText: AppTranslations.of(context).text("Time_of_the_event"),
 	                              hintStyle: TextStyle(color: Colors.grey[400])
 	                            ),
 	                          ),
@@ -173,7 +174,7 @@ class _EventPageState extends State<EventPage> {
                               controller: description,
 	                            decoration: InputDecoration(
 	                              border: InputBorder.none,
-	                              hintText: "Description",
+	                              hintText: AppTranslations.of(context).text("Description"),
 	                              hintStyle: TextStyle(color: Colors.grey[400])
 	                            ),
 	                          ),
@@ -194,7 +195,7 @@ class _EventPageState extends State<EventPage> {
 	                      )
 	                    ),
 	                    child: Center(
-	                      child: RaisedButton(child: isloading ? CircularProgressIndicator():Text('Post event'),color: Color.fromRGBO(143, 148, 251, .6),onPressed: () {
+	                      child: RaisedButton(child: isloading ? CircularProgressIndicator():Text(AppTranslations.of(context).text("PostEvent")),color: Color.fromRGBO(143, 148, 251, .6),onPressed: () {
                           postevent();
 
                         },),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:maps/alleventsdisplay.dart';
 import 'package:maps/locprovider.dart';
 import './ghat_header.dart';
@@ -39,7 +40,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
     count = 1;
     }
     return Scaffold(
-      appBar: AppBar(title: Text('Ghats near your location'),actions: <Widget>[
+      appBar: AppBar(title: Text(AppTranslations.of(context).text("appbar_title")),actions: <Widget>[
         PopupMenuButton(
           onSelected: (int val) {
             if(val == 0)
@@ -59,9 +60,9 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
 
           },
           icon: Icon(Icons.more_vert),itemBuilder: (_)
-          => [PopupMenuItem(child: Text('Organise Event'),value: 0,),
-          PopupMenuItem(child: Text('show all'),value: 1,),
-          PopupMenuItem(child: Text('shopping summary'),value: 2,),
+          => [PopupMenuItem(child: Text(AppTranslations.of(context).text("Organise_Event")),value: 0,),
+          PopupMenuItem(child: Text(AppTranslations.of(context).text("show_all")),value: 1,),
+          PopupMenuItem(child: Text(AppTranslations.of(context).text("Report")),value: 2,),
 
           ],
         ),

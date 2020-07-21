@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rithik-agarwal-scdsos",
+  "private_key_id": "524ab5e63522b92029ef111494ec9f6a650fabe4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCMXy2xjIuwwBDH\nhb9rBj6TryKQxevFeLGG8RJ/KmohnDDazoBZd8U/6cDNTqaMpAR7y6k7ootUFOcg\nAiyzBqrnrCyuz0Locxw7rpRRdBBhuFJMp/rX8jvB3r0hvjuNJwqhAoe4IB7dJc1R\n5Cb2wSKC5CZ55jcVlx6aGugp+rtPjUQgYUnmiya6Fropzu61ZlhVh1UEzFvfWHg/\ncDg4UFvdOmYaMWZmYBoFS4bnY0Vwmtgg2gkB4ul/szOTCUF8teZOESjsgEE7TFdW\nLev33WOK7wje2iffSIxclAZ1PC/smWtJFN3/Udzn+C+bHAWzQavKsL5dJKprhAt3\n4DBBlYLpAgMBAAECggEAHDimfyO6kfaLaRHCwkmnGxoC4QhptnHlfzPIfDiSzd8R\nE2yg8VvbFFZypNRDN9Nh82GmzI6JZIYvUYgeZH/arGk5MowI76L08irPNvEWug7M\nvQyoqfHRgdC+RaJxZpeK04QmtSYADoYjGWu9Sa7auWYVNjzKplSTmnf+ZTI7pmp8\nHKwGBKKhCJCGLY0bXatYx4q3obvwZnjpNK95xaFoG1Hs5a6jFSfpCCl1+l47wkbK\nfrxZ+L0waC9SatCOKnecImgG6jq7/Zbqo+ykwP6rF+XGsDNRwU1uXZHO9LdzUG4u\nZ+i/4FGR37i6HAWAAu/oDxUNccBS0wGHymQg//NrYQKBgQDDq56YpvB04YC9rWWs\ntGign0KxgbWA9q//baVTX2+iUtlomok2Ty5VFIJM0ALCYxu+2pUlhLy6euk6gWbj\nSoKuPXZnRMCDr5v+xl8MUx8NmGgdbBj9OmJWZ9K+7NH3N2TrlQu28nuBu+yFYz0L\nl7aTQQWIfEbSokkBVfYHWwp/RwKBgQC3ps7Dk6566m44Nce+c+HFBfAZPqD+nKAV\nswDcCy0+CLUTbCi3jjLkfgb4bHkbXkXOZz5YviMNfvcnWMPsNEORFuV+novcKO6D\n32d/KjHmN9VxAWdxbqsm+eGFlGoQw3nYVnsXBQmbV1x0gE+WnwrN8vQtMoNKllGt\nunmPQJvkTwKBgQChFzK71HyUjW7TOeVCOUkGK/fZccM/SFj/PoLkz+Z1SiYpQ0kB\nyFCJxRe9K2eKJ9QY3ZX6zHwgPr6y5wQQzjAmSP2o6WZhQ/t21lQ8Llabd8UHrA4q\ntJ1vK4zKmOgH0rgoZ428cYeS+GcyLdB9McsjEl3+zunz0Z2vFtk1lxNeUwKBgCsZ\n/grOnTOB045jqNZc8g7AfwIdvcEj1zpggYIjKWIWvxCo4MF7oRwZK9+f7ahrrqxr\ndKl1Llrbgnv8jDbiaT0jB4d5BFAOVzQh+XNR3tYuImzcLH/lvktud+xW0bHPfsg0\nO71CVGfdz/gTqRorh2igbYgyA7g8oTzJt//T5QJnAoGAHxq57A7KnsPZWqODId46\n/t2AqAMaLMAF0+Qc4B0QXsB7m+kH77Crm6WH7CFd/FZ6qXxeHSGTGexrQyR7gbCg\nEAeJIzv4h2MRf/ibmZEb1VXqR1PHKGbeIrCrwoKf3u7a6sevG3kI3yGAOItU8Bel\noVBq4RimMdKpOY0gKE/o51o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-mnvirr@rithik-agarwal-scdsos.iam.gserviceaccount.com",
+  "client_id": "105639603890516822037",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-mnvirr%40rithik-agarwal-scdsos.iam.gserviceaccount.com"
+}

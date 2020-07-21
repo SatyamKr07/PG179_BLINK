@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import './locprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class Storyline extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              'See More reviews',
+              AppTranslations.of(context).text("Seemorereviews"),
               style: TextStyle(fontSize: 18,color: Colors.blue,fontWeight: FontWeight.bold)),
             Icon(
               Icons.keyboard_arrow_down,

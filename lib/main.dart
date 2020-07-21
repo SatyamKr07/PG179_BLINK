@@ -7,16 +7,34 @@ import 'package:provider/provider.dart';
 import './locprovider.dart';
 import './Register.dart';
 import './MyHomepage.dart';
+import './Apptranslationdelegate.dart';
+import './AppTranslation.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import './Userclass.dart';
 
 
 import './location.dart';
 
-void main() => runApp(MyApp());
+Future<Null> main() async {runApp(LocalisedApp());}
 
-class MyApp extends StatelessWidget {
+class LocalisedApp extends StatefulWidget {
+  @override
+  LocalisedAppState createState() {
+    return new LocalisedAppState();
+  }
+}
+
+class LocalisedAppState extends State<LocalisedApp>  {
+ AppTranslationsDelegate _newLocaleDelegate;
+
+    @override
+  void initState() {
+    super.initState();
+    _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
+    application.onLocaleChanged = onLocaleChange;
+  }
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,10 +47,26 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFFFF5959),
       ),
       home: Login(),
+      localizationsDelegates: [
+        _newLocaleDelegate,
+        //provides localised strings
+        GlobalMaterialLocalizations.delegate,
+        //provides RTL support
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale("en", ""),
+        const Locale("es", ""),
+      ],
      
       routes: {LocationInput.routeName: (ctx) => LocationInput()}
       ,
     ));
+  }
+  void onLocaleChange(Locale locale) {
+    setState(() {
+      _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+    });
   }
 }
 

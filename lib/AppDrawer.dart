@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:maps/ActivityFeed.dart';
+import 'package:maps/Application.dart';
+import 'package:maps/RegisteredEvents.dart';
+import 'package:maps/youractivity.dart';
 import './Userclass.dart';
 class AppDrawer extends StatelessWidget {
   final User u;
@@ -8,7 +12,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child:Column(children: <Widget>[
-        AppBar(title:Text("Profile Details")),
+        AppBar(title:Text(AppTranslations.of(context).text("profile_details"))),
         Divider(),
         Column(
           children:<Widget>[
@@ -28,7 +32,7 @@ class AppDrawer extends StatelessWidget {
               SizedBox(height: 12,),
               Center(child: Text(u.username,style: TextStyle(color: Colors.yellowAccent,fontSize: 18),)),
               Divider(),
-              Center(child: Text("Points",style: TextStyle(color: Colors.redAccent,fontSize: 20),)),
+              Center(child: Text(AppTranslations.of(context).text("points"),style: TextStyle(color: Colors.redAccent,fontSize: 20),)),
                Center(child: Text(u.points.toString(),style: TextStyle(color: Colors.redAccent,fontSize: 20),))
 
 
@@ -38,15 +42,23 @@ class AppDrawer extends StatelessWidget {
             
 
         ]),
-        ListTile(leading: Icon(Icons.shop),title: Text('shop'),
+        ListTile(leading: Icon(Icons.shop),title: Text('Your Feeds'),
         onTap: () {
+           Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityFeed()));
+
         
         },),
-         ListTile(leading: Icon(Icons.shop),title: Text('My orders'),
+         ListTile(leading: Icon(Icons.shop),title: Text('Your Events'),
         onTap: () {
+           Navigator.push(context, MaterialPageRoute(builder: (context) => YourActivity()));
         
         },),
-        ListTile(leading: Icon(Icons.shop),title: Text('Mange Products'),
+        ListTile(leading: Icon(Icons.shop),title: Text('Registered Events'),
+        onTap: () {
+           Navigator.push(context, MaterialPageRoute(builder: (context) => RegisteredEvents()));
+        
+        },),
+        ListTile(leading: Icon(Icons.shop),title: Text('Reports'),
         onTap: () {
          
         },)

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dio/dio.dart';
+import 'package:maps/Application.dart';
 import 'package:maps/EventRegister.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
         Container(child: Text("date:${d['Date']} time:${d['time']}",
           style: TextStyle(color: Colors.black54, fontSize: 18.0,fontWeight: FontWeight.bold),)),
           SizedBox(height: 10,),
-          RaisedButton(child: Text('Details'),color: Colors.blue,onPressed: () {
+          RaisedButton(child: Text(AppTranslations.of(context).text("details")),color: Colors.blue,onPressed: () {
             Navigator.push(context,MaterialPageRoute(builder: (context) => EventRegister(d)));
 
           },)

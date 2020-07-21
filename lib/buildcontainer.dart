@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
 class BuildContainer extends StatefulWidget {
@@ -61,7 +62,7 @@ Widget myDetails(String name,String rating)
       ]
     ),),
     SizedBox(height: 5.0,),
-    Text('Closed open at 17:00 thu',style: TextStyle(color: Colors.black54,
+    Text(AppTranslations.of(context).text("timings"),style: TextStyle(color: Colors.black54,
     fontSize: 18.0,fontWeight: FontWeight.bold),),
    
    

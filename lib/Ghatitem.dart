@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps/Application.dart';
 import 'package:provider/provider.dart';
 import './Details.dart';
 import './GhatDetailspage.dart';
@@ -13,7 +14,7 @@ class Ghatitem extends StatelessWidget {
   Widget build(BuildContext context) {
     final placedata=Provider.of<Places>(context,listen: false);
     return Container(child:Card(elevation: 10,child:GridTile(
-      child:GestureDetector(child:Image.network('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${image}&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo',fit: BoxFit.cover,),onTap: () {
+      child:GestureDetector(child:Image .network('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${image}&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo',fit: BoxFit.cover,),onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => GhatDetailsPage(id)));
 
       
@@ -24,7 +25,7 @@ class Ghatitem extends StatelessWidget {
         leading: IconButton(icon :Icon(Icons.favorite_border),color: Colors.redAccent,onPressed: () {
           Scaffold.of(context).hideCurrentSnackBar();
           Scaffold.of(context).showSnackBar(
-            SnackBar(content:Text('You liked this ghat'),
+            SnackBar(content:Text(AppTranslations.of(context).text("Youlikedthisghat")),
             duration:Duration(seconds:2),
            )
           );
