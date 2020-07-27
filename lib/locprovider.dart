@@ -19,6 +19,8 @@ class Location {
 
 class Places extends ChangeNotifier {
   List<dynamic> _places = List<dynamic>();
+  List<dynamic> _reviews=List<dynamic>();
+  List<dynamic> _broad=List<dynamic>();
   User u;
   Details d;
   double _lat;
@@ -27,7 +29,10 @@ class Places extends ChangeNotifier {
   List<dynamic> get items {
     if (_places != null) return [..._places];
   }
-
+  List<dynamic> get reviews {
+    if(_reviews != null) return [..._reviews];
+  }
+  
   User get user {
     return u;
   }
@@ -88,7 +93,7 @@ class Places extends ChangeNotifier {
 
   Future<void> fetchDeatils(String id) async {
     final url =
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$id&fields=name,photos,formatted_address,website,adr_address,opening_hours,review,price_level,rating,formatted_phone_number,international_phone_number&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$id&fields=geometry,name,photos,formatted_address,website,adr_address,opening_hours,review,price_level,rating,formatted_phone_number,international_phone_number&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
     final response = await http.get(url);
     final extracted = json.decode(response.body);
     final result = extracted['result'];
@@ -100,7 +105,11 @@ class Places extends ChangeNotifier {
       result['photos'],
       result['rating'],
       result['name'],
+      result['geometry']['location']['lat'],
+      result['geometry']['location']['lng']
     );
+    DocumentSnapshot d1=await Firestore.instance.collection('General').document(id).get();
+    _reviews=d1['reviewedby'];
 
     notifyListeners();
   }

@@ -5,6 +5,7 @@ import 'package:maps/locprovider.dart';
 import 'package:maps/user_review.dart';
 import './ghat_header.dart';
 import './hostevent.dart';
+import './NearbyPlaces.dart';
 import 'package:provider/provider.dart';
 import './photo_scroller.dart';
 import './reviewdisplay.dart';
@@ -53,7 +54,10 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
               }
-              if (val == 2) {}
+              if (val == 2) {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NearbyPlaces()));
+              }
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
@@ -66,7 +70,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 value: 1,
               ),
               PopupMenuItem(
-                child: Text(AppTranslations.of(context).text("Report")),
+                child: Text(AppTranslations.of(context).text("See Nearby places")),
                 value: 2,
               ),
             ],
@@ -85,7 +89,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                   ),
                   PhotoScroller(),
                   SizedBox(height: 20.0),
-                  UserReview(),
+                  UserReview(id),
                 ],
               ),
             ),

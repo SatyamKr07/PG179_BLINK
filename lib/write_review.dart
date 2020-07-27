@@ -1,16 +1,27 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:maps/locprovider.dart';
+import 'package:provider/provider.dart';
 
 class WriteReview extends StatefulWidget {
+  final String ghatid;
+  WriteReview(this.ghatid);
   @override
-  _WriteReviewState createState() => _WriteReviewState();
+  _WriteReviewState createState() => _WriteReviewState(ghatid);
 }
 
 class _WriteReviewState extends State<WriteReview> {
   File _image;
+  double rating;
+  String ghatid;
+  var placedata;
+  String review;
+  _WriteReviewState(this.ghatid);
 
   final picker = ImagePicker();
 
@@ -34,6 +45,7 @@ class _WriteReviewState extends State<WriteReview> {
 
   @override
   Widget build(BuildContext context) {
+    placedata=Provider.of<Places>(context,listen:false);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -54,8 +66,41 @@ class _WriteReviewState extends State<WriteReview> {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: RaisedButton(
-                  onPressed: () {
-                    debugPrint('I am Awesome');
+                  onPressed: () async{
+                    if(_image != null)
+                    {
+                      showDialog(context: context,
+                      builder: (_) => AlertDialog(
+                                  title: Text('Processing'),
+                                  content: CircularProgressIndicator()));
+    String fileName=DateTime.now().millisecondsSinceEpoch.toString();
+    StorageReference refernce=FirebaseStorage.instance.ref().child(fileName);
+    StorageUploadTask uploasTask=refernce.putFile(_image);
+    StorageTaskSnapshot storageTaskSnapshot=await uploasTask.onComplete;
+    storageTaskSnapshot.ref.getDownloadURL().then((url) async{
+       
+                                String postid=DateTime.now().toString();  
+                                Firestore.instance.collection('BroadGeneral').document(postid).setData({
+                                  "id":placedata.u.userid, 
+                                  "ghatid":ghatid,
+                                  "image":url,
+                                  "name":placedata.u.username,
+                                  "photo":placedata.u.photourl,
+                                  "postid":postid,
+                                  "review":review,
+                                  "rating":rating.toString(),
+                                   "upvotes":[]
+                                });
+                                
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                  builder: (_) => AlertDialog(
+                                  title: Text('Thank You'),
+                                  content: Text('Your review has been successfully recorded'))
+                  );         
+      
+    });            
+                    }
                   },
                   textColor: Colors.white,
                   color: Colors.black,
@@ -93,8 +138,8 @@ class _WriteReviewState extends State<WriteReview> {
                         Icons.star,
                         color: Colors.amber,
                       ),
-                      onRatingUpdate: (rating) {
-                        print(rating);
+                      onRatingUpdate: (ratin) {
+                        rating=ratin;
                       },
                     ),
                   ),
@@ -122,7 +167,11 @@ class _WriteReviewState extends State<WriteReview> {
                           color: Colors.black),
                     ),
                   )
-                : new Image.file(_image),
+                : new Container(
+                  width:200,
+                  height:200,
+                  child:Image.file(_image,fit:BoxFit.cover)
+                )
             //Image.file(imageFile,height: 200,width: 200,),
           ),
           Container(
@@ -204,6 +253,7 @@ class _WriteReviewState extends State<WriteReview> {
               ),
               onChanged: (val) {
                 // widget.onChanged(val);
+                review=val;
               },
             ),
           ),

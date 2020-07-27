@@ -35,11 +35,13 @@ dependencies:
   firebase_messaging: ^6.0.13   
   google_sign_in: ^4.1.0 
   firebase_storage: ^3.0.6
+  dropdownfield: ^1.0.0
   font_awesome_flutter: ^8.2.0
   flutter_localizations:
     sdk: flutter
   
   get: ^3.3.0
+
   flutter_rating_bar: ^3.0.1+1
 
   # The following adds the Cupertino Icons font to your application.
