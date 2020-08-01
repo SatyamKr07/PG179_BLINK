@@ -6,8 +6,6 @@ import 'package:maps/MyHomepage.dart';
 import 'package:maps/alleventsdisplay.dart';
 import 'package:maps/main.dart';
 
-import 'auth_service.dart';
-
 class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => StartState();
@@ -15,10 +13,6 @@ class SplashScreen extends StatefulWidget {
 
 class StartState extends State<SplashScreen> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  @override
-  Widget build(BuildContext context) {
-    return initScreen(context);
-  }
 
   @override
   void initState() {
@@ -30,15 +24,17 @@ class StartState extends State<SplashScreen> {
 
   void handleSignin(GoogleSignInAccount account) {
     if (account != null) {
-      Future.delayed(Duration(seconds: 1)).then(
-        (value) => Get.off(MyHomePage(account.id)),
-      );
+      Timer(
+          Duration(seconds: 2),
+          () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => MyHomePage(account.id))));
     } else {
       Get.off(Login());
     }
   }
 
-  initScreen(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
@@ -50,7 +46,7 @@ class StartState extends State<SplashScreen> {
             image: AssetImage("assets/g2.jpg"),
             fit: BoxFit.fill,
           ),
-          // color: Colors.teal.withOpacity(.9),
+          color: Colors.teal.withOpacity(.9),
         ),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

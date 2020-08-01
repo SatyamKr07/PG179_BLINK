@@ -86,9 +86,9 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _message.getToken().then((tok) {
-      token = tok;
-    });
+    // _message.getToken().then((tok) {
+    //   token = tok;
+    // });
 
     // googleSignIn.signInSilently(suppressErrors: false).then((account) {
     //   handleSignin(account);

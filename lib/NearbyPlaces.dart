@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:maps/MyPlaces.dart';
 import 'package:maps/locprovider.dart';
 import 'package:provider/provider.dart';
+
 class NearbyPlaces extends StatefulWidget {
   @override
   _NearbyPlacesState createState() => _NearbyPlacesState();
 }
 
 class _NearbyPlacesState extends State<NearbyPlaces> {
-  final placeselected=TextEditingController();
+  final placeselected = TextEditingController();
   var placedata;
-  List<String> places=[
-
+  List<String> places = [
     'accounting',
     'airport',
     'amusement_park',
@@ -63,7 +63,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     'laundry',
     'lawyer',
     'library'
-    'light_rail_station',
+        'light_rail_station',
     'liquor_store',
     'local_government_office',
     'locksmith',
@@ -89,7 +89,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     'real_estate_agency',
     'restaurant',
     'roofing_contractor'
-    'rv_park',
+        'rv_park',
     'school',
     'secondary_school',
     'shoe_store',
@@ -108,52 +108,57 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     'travel_agency',
     'university',
     'veterinary_care'
-    'zoo'];
-    String place;
+        'zoo'
+  ];
+  String place;
   @override
   Widget build(BuildContext context) {
-    placedata=Provider.of<Places>(context,listen:false);
+    placedata = Provider.of<Places>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(title: Text('Search nearby places'),),
-      body: Column(
-        children:<Widget>[
-          SizedBox(height: 100,),
-          DropDownField(
-            controller: placeselected,
-            hintText: 'Select any place',
-            enabled: true,
-            items: places,
-            onValueChanged: (value) {
-              setState(() {
-                place=value;
-              });
-            },
-          ),
-          SizedBox(height: 10,),
-          Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: RaisedButton(
-                              shape:RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                              color: Color(0xffff520d),
-                              child: Text('Search...',
-                                style: TextStyle(color: Color(0xffffffff)),),
-                              onPressed: () async{
-                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyPlaces(place,placedata.d.lat,placedata.d.long)));
-                               
-                                }
-                                
-
-                              
-                            ),
-                          )),
-                        )
-
-          
-        ]
+      appBar: AppBar(
+        title: Text('Search nearby places'),
       ),
-      
+      body: Column(children: <Widget>[
+        SizedBox(
+          height: 100,
+        ),
+        DropDownField(
+          controller: placeselected,
+          hintText: 'Select any place',
+          enabled: true,
+          items: places,
+          onValueChanged: (value) {
+            setState(() {
+              place = value;
+            });
+          },
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+              child: Align(
+            alignment: Alignment.bottomCenter,
+            child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Color(0xffff520d),
+                child: Text(
+                  'Search...',
+                  style: TextStyle(color: Color(0xffffffff)),
+                ),
+                onPressed: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => MyPlaces(
+                              place, placedata.d.lat, placedata.d.long)));
+                }),
+          )),
+        )
+      ]),
     );
   }
 }
