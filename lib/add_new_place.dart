@@ -206,7 +206,11 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                                   "photo":placedata.u.photourl,
                                   "postid":postid,
                                   "review":review.text,
-                                   "location":_currentAddress
+                                   "location":_currentAddress,
+                                   "date":DateTime.now(),
+                                   "reviewed":0,
+                                   "longlat":_currentPosition.toString()
+
                                 });
                                 
                   Navigator.pop(context);

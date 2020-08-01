@@ -27,7 +27,7 @@ class _UserReviewState extends State<UserReview> {
   bool selected5=false;
   bool selected6=false;
   bool selected7=false;
-  bool selected=false;
+  List<bool> selected=[];
   bool selected8=false;
   bool selected9=false;
   String answer1="Dont know";String answer2="Dont know";String answer3="Dont know";
@@ -46,6 +46,8 @@ class _UserReviewState extends State<UserReview> {
   @override
   Widget build(BuildContext context) {
     c++;
+    for(int i=0;i<1000;i++)
+    selected.add(false);
      placedata=Provider.of<Places>(context,listen:false);
      id=placedata.u.userid;
      reviews=placedata.reviews;
@@ -345,7 +347,7 @@ class _UserReviewState extends State<UserReview> {
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
-                    "title: Good ",
+                    "title: Review ",
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 15,
@@ -376,21 +378,22 @@ class _UserReviewState extends State<UserReview> {
                 ),
                 SizedBox(height: 3,),
                 Row(children:<Widget>[
-                  IconButton(icon: (selected || snapshot.data.documents[index]['upvotes'].contains(placedata.u.userid)) ? Icon(Icons.favorite) : Icon(Icons.favorite_border), onPressed: () async{
+                  IconButton(icon: (selected[index] || snapshot.data.documents[index]['upvotes'].contains(placedata.u.userid)) ? Icon(Icons.favorite) : Icon(Icons.favorite_border), onPressed: () async{
                     DocumentSnapshot d=await Firestore.instance.collection('BroadGeneral').document(snapshot.data.documents[index]['postid']).get();
-                    if(selected)
+                    if(selected[index])
                     {
                        setState(() {
-                         selected=false;
+                         selected[index]=false;
                          d.reference.updateData({'upvotes':FieldValue.arrayRemove([
                           placedata.u.userid
                          ])});
-                       });
+                    });
                     }
+    
                     else
                     {
                       setState(() {
-                         selected=true;
+                         selected[index]=true;
                          d.reference.updateData({'upvotes':FieldValue.arrayUnion([
                           placedata.u.userid
                          ])});

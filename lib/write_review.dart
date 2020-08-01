@@ -87,6 +87,9 @@ class _WriteReviewState extends State<WriteReview> {
                                   "name":placedata.u.username,
                                   "photo":placedata.u.photourl,
                                   "postid":postid,
+                                  "latitude":placedata.d.lat,
+                                  "longitude":placedata.d.long,
+                                  "date":DateTime.now(),
                                   "review":review,
                                   "rating":rating.toString(),
                                    "upvotes":[]
