@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:maps/location.dart';
+import 'package:maps/splash_screen.dart';
 import 'package:provider/provider.dart';
 import './locprovider.dart';
 import './Register.dart';
@@ -48,7 +49,7 @@ class LocalisedAppState extends State<LocalisedApp> {
             primarySwatch: Colors.brown,
             accentColor: const Color(0xFFFF5959),
           ),
-          home: Login(),
+          home: SplashScreen(),
           localizationsDelegates: [
             _newLocaleDelegate,
             //provides localised strings
@@ -89,19 +90,22 @@ class _LoginState extends State<Login> {
       token = tok;
     });
 
-    googleSignIn.signInSilently(suppressErrors: false).then((account) {
-      handleSignin(account);
-    });
+    // googleSignIn.signInSilently(suppressErrors: false).then((account) {
+    //   handleSignin(account);
+    // });
   }
 
-  void handleSignin(GoogleSignInAccount account) {
-    if (account != null) {
-      // Navigator.push(context,
-      //     MaterialPageRoute(builder: (context) => MyHomePage(account.id)));
-      Get.off(MyHomePage(account.id));
-      print('billa');
-    }
-  }
+  // void handleSignin(GoogleSignInAccount account) {
+  //   if (account != null) {
+  //     // Navigator.push(context,
+  //     //     MaterialPageRoute(builder: (context) => MyHomePage(account.id)));
+  //     Get.off(MyHomePage(account.id));
+  //     print('billa');
+  //   }
+  //   // else {
+  //   //   Get.off(SplashScreen());
+  //   // }
+  // }
 
   void create() async {
     final user = googleSignIn?.currentUser;
@@ -125,7 +129,7 @@ class _LoginState extends State<Login> {
       });
     }
 
-    print('kutta');
+    print('hey');
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => MyHomePage(user.id)));
   }
