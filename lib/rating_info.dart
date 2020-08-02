@@ -53,7 +53,7 @@ class RatingInformation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildRatingBar(placedata.d.rating.toString()),
+        _buildRatingBar(double.parse(placedata.d.rating.toString()).toString()),
        
       ],
     );

@@ -33,7 +33,7 @@ class PhotoScroller extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0),
         child: Image.network(
-          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placedata.d.photos[index]['photo_reference']}&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo',
+          (placedata.d.photos != []) ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placedata.d.photos[index]['photo_reference']}&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo':'',
           width: 160.0,
           height: 120.0,
           fit: BoxFit.cover,

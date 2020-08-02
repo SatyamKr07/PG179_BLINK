@@ -13,6 +13,7 @@ class MovieDetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     var placedata=Provider.of<Places>(context,listen:false);
     
+    
 
     var movieInformation = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +33,7 @@ class MovieDetailHeader extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 140.0),
-          child: ArcBannerImage(placedata.d.photos[0]['photo_reference']),
+          child: ArcBannerImage((placedata.d.photos != []) ? placedata.d.photos[0]['photo_reference'] : ""),
         ),
         Positioned(
           bottom: 0.0,
@@ -43,7 +44,7 @@ class MovieDetailHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Poster(
-                placedata.d.photos[1]['photo_reference'],
+                (placedata.d.photos != []) ? placedata.d.photos[1]['photo_reference']: "",
                 height: 180.0,
               ),
               SizedBox(width: 16.0),

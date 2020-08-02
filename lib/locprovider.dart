@@ -120,18 +120,18 @@ class Places extends ChangeNotifier {
   }
 
   Future<void> fetchDeatils(String id) async {
+    print(id);
     final url =
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$id&fields=geometry,name,photos,formatted_address,website,adr_address,opening_hours,review,price_level,rating,formatted_phone_number,international_phone_number&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
     final response = await http.get(url);
     final extracted = json.decode(response.body);
     final result = extracted['result'];
-    print(result['reviews'][3]);
 
     d = Details(
       result['formatted_address'],
       result['reviews'],
-      result['photos'],
-      result['rating'],
+      (result['photos'] != null) ? result['photos'] : [],
+      (result['rating'] != null) ? result['rating'] : 0.0,
       result['name'],
       result['geometry']['location']['lat'],
       result['geometry']['location']['lng']
