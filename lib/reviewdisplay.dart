@@ -9,7 +9,6 @@ class Storyline extends StatelessWidget {
     final placedata = Provider.of<Places>(context, listen: false);
     var theme = Theme.of(context);
     var textTheme = Theme.of(context).textTheme;
-    print(placedata.d.reviews.toString());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
