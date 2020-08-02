@@ -134,7 +134,7 @@ class Places extends ChangeNotifier {
 
     d = Details(
         result['formatted_address'],
-        result['reviews'],
+        (result['reviews'] != null) ? result['revies'] : [],
         (result['photos'] != null) ? result['photos'] : [],
         (result['rating'] != null) ? result['rating'] : 0.0,
         result['name'],
