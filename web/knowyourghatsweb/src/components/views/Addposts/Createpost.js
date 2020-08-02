@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 import  { firestore, storage } from "../../../firebase";
 import history from "../../../history";
 const CreatePost = () => {
@@ -100,58 +100,61 @@ const CreatePost = () => {
     return (
                     <MDBContainer className="align-content-lg-center">
                       <MDBRow center style={{marginTop: "50px"}}>
-                        <MDBCol md="6">
-                          <form className="align-content-lg-center">
-                            <h4 style={{marginBottom: "20px"}}>Create a post</h4>
+                        <MDBCol md="8">
+                        <h4 style={{marginBottom: "20px", fontWeight: 700,textAlign:"center"}}>Upload a Project</h4>
+                          <MDBCard border>
+                            <MDBCardBody>
+                            <form className="align-content-lg-center">
                             <label htmlFor="defaultFormContactNameEx" className="form">
                               Title
                             </label>
-                            <input name="title" value={title} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
-                            <br style={{marginBottom: "10px"}}/>
+                            <input style={{marginBottom: "15px"}} name="title" value={title} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
+                            <br style={{marginBottom: "20px"}}/>
                             <label  htmlFor="defaultFormContactEmailEx" className="form">
                               Image
                             </label>
                             <input name="image" type="file" style={{padding: 2}} onChange={handleImageAsFile} id="defaultFormContactEmailEx" className="form-control" />
-                            <br style={{marginBottom: "5px"}} />
-                            <MDBBtn rounded color="blue lighten-3" size="sm" type="submit" onClick={handleFireBaseUpload}>
+                            <MDBBtn style={{marginBottom: "15px"}} rounded color="blue lighten-3" size="sm" type="submit" onClick={handleFireBaseUpload}>
                                         Upload
                             </MDBBtn>
-                            <br />
-                            <div style={{marginBottom: "10px"}}></div>
+                            
+                            <div style={{marginBottom: "15px"}}></div>
                             <label htmlFor="defaultFormContactNameEx" className="form">
                               Budget Utilized
                             </label>
-                            <input name="budget" value={budget} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
-                            <br style={{marginBottom: "10px"}} />
-                            <div>
-                                <label className="form">Has the project completed?</label>
+                            <input style={{marginBottom: "15px"}} name="budget" value={budget} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
+                            <br style={{marginBottom: "20px"}} />
+                            <div style={{marginBottom: "15px"}}>
+                                <label style={{marginRight: "20px"}} className="form">Has the project completed?</label>
                                 <input style={{marginLeft: "5px",marginRight: "5px"}} type="checkbox" onChange = {onChangeHandler}  name="donetrue" />
-                                <span className="form" style={{marginRight: "5px"}}>Yes</span>
+                                <span className="form" style={{marginRight: "20px"}}>Yes</span>
                                 <input style={{marginRight: "5px"}} type="checkbox" onChange = {onChangeHandler}  name="donefalse" />
                                 <span className="form" style={{marginRight: "5px"}}>No</span>
                             </div >
-                            <br style={{marginBottom: "10px"}} />
+                            <br style={{marginBottom: "15px"}} />
                             <label htmlFor="defaultFormContactNameEx" className="form">
                               Time taken for the project
                             </label>
-                            <input name="years" value={years} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
-                            <br style={{marginBottom: "10px"}}/>
+                            <input style={{marginBottom: "15px"}} name="years" value={years} type="text" onChange = {onChangeHandler}  id="defaultFormContactNameEx" className="form-control" />
+                            <br style={{marginBottom: "15px"}}/>
                             <label htmlFor="defaultFormContactMessageEx" className="form">
                               Description
                             </label>
-                            <textarea name="description" value={description} onChange = {onChangeHandler} type="text" id="defaultFormContactMessageEx" className="form-control" rows="3" />
+                            <textarea style={{marginBottom: "15px"}} name="description" value={description} onChange = {onChangeHandler} type="text" id="defaultFormContactMessageEx" className="form-control" rows="3" />
                             <div className="text-center mt-4">
                                       <MDBBtn rounded color="blue darken-4" onClick= {(event) => {addToDatabase(event, title, imageAsUrl.imgUrl, description)} }>
                                         Post
                                       </MDBBtn>
                                     </div>
                                   </form>
+                            </MDBCardBody>
+                          </MDBCard>
+
+                          
                                 </MDBCol>
                               </MDBRow>
                             </MDBContainer>
                           );
 } 
-
-
 export default CreatePost;
 
