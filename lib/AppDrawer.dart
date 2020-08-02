@@ -14,7 +14,7 @@ import './Userclass.dart';
 class AppDrawer extends StatelessWidget {
   final User u;
   AppDrawer(this.u);
-  final googlesignin = GoogleSignIn();
+  GoogleSignIn googlesignin = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
@@ -107,12 +107,13 @@ class AppDrawer extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.person),
           title: Text('Logout'),
-          onTap: () async {
+          onTap: () {
             placedata.clear();
             placedata.markers.clear();
-            await googlesignin?.signOut()?.then((_) {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Login()));
+            googlesignin?.signOut()?.then((_) {
+              // Navigator.pushReplacement(
+              //     context, MaterialPageRoute(builder: (context) => Login()));
+              Get.offAll(Login());
             });
           },
         )

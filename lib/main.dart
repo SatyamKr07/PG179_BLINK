@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
     //   token = tok;
     // });
 
-    googleSignIn?.signInSilently(suppressErrors: false)?.then((account) {
+    googleSignIn.signInSilently(suppressErrors: false).then((account) {
       handleSignin(account);
     });
   }
@@ -107,7 +107,7 @@ class _LoginState extends State<Login> {
   }
 
   void create() async {
-    final user = googleSignIn?.currentUser;
+    final user = googleSignIn.currentUser;
     DocumentSnapshot d =
         await Firestore.instance.collection('Users').document(user.id).get();
     if (!d.exists) {
@@ -133,9 +133,9 @@ class _LoginState extends State<Login> {
         context, MaterialPageRoute(builder: (context) => MyHomePage(user.id)));
   }
 
-  void login() async {
+  void login() {
     print('hii');
-    await googleSignIn?.signIn()?.then((_) {
+    googleSignIn.signIn().then((_) {
       create();
     });
   }
@@ -144,111 +144,71 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(
-        builder: (context) => Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child:
-                  // Image.asset('assets/g1.jpg')
-                  Image.network(
-                      'https://images.unsplash.com/photo-1518050947974-4be8c7469f0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                      fit: BoxFit.fill,
-                      color: Color.fromRGBO(255, 255, 255, 0.6),
-                      colorBlendMode: BlendMode.modulate),
+        builder: (context) => Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/g2.jpg'), fit: BoxFit.fill),
+          ),
+          child: Container(
+            height: 400,
+            width: 400,
+            decoration: BoxDecoration(
+              // color: Colors.green,
+              border: Border.all(color: Colors.red),
             ),
-            Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Welcome to Know Your Ghats!",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      shape: BoxShape.rectangle,
+                      // border: Border.all(
+                      //   color: Colors.blue,
+                      //   width: 4,
+                      // ),
+                      color: Colors.blue[100]),
+                  child: Text(
+                    "Know Your Ghats!",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(height: 10.0),
                 Container(
-                    width: 250.0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0)),
-                          color: Color(0xffffffff),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                FontAwesomeIcons.google,
-                                color: Color(0xffCE107C),
-                              ),
-                              SizedBox(width: 10.0),
-                              Text(
-                                'Sign in with Google',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18.0),
-                              ),
-                            ],
-                          ),
-                          onPressed: () => login()),
-                    )),
-                // Container(
-                //     width: 250.0,
-                //     child: Align(
-                //       alignment: Alignment.center,
-                //       child: RaisedButton(
-                //         shape: RoundedRectangleBorder(
-                //             borderRadius: new BorderRadius.circular(30.0)),
-                //         color: Color(0xffffffff),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           children: <Widget>[
-                //             Icon(
-                //               FontAwesomeIcons.facebookF,
-                //               color: Color(0xff4754de),
-                //             ),
-                //             SizedBox(width: 10.0),
-                //             Text(
-                //               'Sign in with Facebook',
-                //               style: TextStyle(
-                //                   color: Colors.black, fontSize: 18.0),
-                //             ),
-                //           ],
-                //         ),
-                //         onPressed: () {},
-                //       ),
-                //     )),
-                // Container(
-                //     width: 250.0,
-                //     child: Align(
-                //       alignment: Alignment.center,
-                //       child: RaisedButton(
-                //         shape: RoundedRectangleBorder(
-                //             borderRadius: new BorderRadius.circular(30.0)),
-                //         color: Color(0xffffffff),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           children: <Widget>[
-                //             Icon(
-                //               FontAwesomeIcons.solidEnvelope,
-                //               color: Color(0xff4caf50),
-                //             ),
-                //             SizedBox(width: 10.0),
-                //             Text(
-                //               'Sign in with Email',
-                //               style: TextStyle(
-                //                   color: Colors.black, fontSize: 18.0),
-                //             ),
-                //           ],
-                //         ),
-                //         onPressed: () {},
-                //       ),
-                //     )),
+                  width: 250.0,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Color(0xffffffff),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(
+                              FontAwesomeIcons.google,
+                              color: Color(0xffCE107C),
+                            ),
+                            SizedBox(width: 10.0),
+                            Text(
+                              'Sign in with Google',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 18.0),
+                            ),
+                          ],
+                        ),
+                        onPressed: () => login()),
+                  ),
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

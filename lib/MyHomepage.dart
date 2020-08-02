@@ -148,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
           : Container(),
       appBar: AppBar(
         title: Text(AppTranslations.of(context).text("appbar_title")),
+        backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
               icon: Icon(
