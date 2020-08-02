@@ -11,13 +11,18 @@ import 'package:location/location.dart' as http;
 import 'package:permission/permission.dart';
 class LocationInput extends StatefulWidget {
   static const routeName='/locationinput';
+  final double lat;
+  final double long;
+  LocationInput(this.lat,this.long);
   @override
-  _LocationInputState createState() => _LocationInputState();
+  _LocationInputState createState() => _LocationInputState(this.lat,this.long);
 }
 
 class _LocationInputState extends State<LocationInput> {
   String image;
   int count = 0;
+  final double lat,long;
+  _LocationInputState(this.lat,this.long);
   List<int> views=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   
   static var geolocator = Geolocator();
@@ -27,7 +32,7 @@ static var locationOptions = LocationOptions(accuracy: LocationAccuracy.high, di
   Set<Circle> circles = Set.from([Circle(
     circleId: CircleId('circle1'),
     fillColor: Colors.black38,
-    center: LatLng(25.321684,82.987289),
+    center: LatLng(21,83),
     radius: 4000,
 )]);
   List<LatLng> routecord=[];
@@ -35,7 +40,7 @@ static var locationOptions = LocationOptions(accuracy: LocationAccuracy.high, di
   var locdata;
   Completer<GoogleMapController> _controller=Completer();
   GoogleMapController _controller1;
-  void getpoints(double lat,double long) async
+  void getpoints(double latitude,double longitude) async
   { var permission=await Permission.getPermissionsStatus([PermissionName.Location]);
   if(permission[0].permissionStatus == PermissionStatus.notAgain)
   {
@@ -43,7 +48,7 @@ static var locationOptions = LocationOptions(accuracy: LocationAccuracy.high, di
   }
   else
   {
-    routecord=await googleMapPolyline.getCoordinatesWithLocation(origin:LatLng(25.321684,82.987289) , destination: LatLng(lat,long), mode: RouteMode.driving);
+    routecord=await googleMapPolyline.getCoordinatesWithLocation(origin:LatLng(lat,long) , destination: LatLng(latitude,longitude), mode: RouteMode.driving);
      polyline.clear();
       polyline.add(Polyline(
         polylineId: PolylineId('route1'),
@@ -55,7 +60,7 @@ static var locationOptions = LocationOptions(accuracy: LocationAccuracy.high, di
         endCap:Cap.buttCap
       ));
        final GoogleMapController controller=await _controller.future;
-   controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(25.321684,82.987289),zoom: 15,tilt: 50,bearing: 45)));
+   controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,long),zoom: 15,tilt: 50,bearing: 45)));
 
     setState(() {
       print(routecord);
@@ -96,7 +101,7 @@ static var locationOptions = LocationOptions(accuracy: LocationAccuracy.high, di
     return Scaffold(appBar: AppBar(title: Text('Map overview'),),body:  Stack(children:<Widget>[GoogleMap(
       onMapCreated: onMapcreated,
       polylines:polyline,
-      initialCameraPosition: CameraPosition(target:LatLng(25.321684,82.987289),zoom: 14.0),
+      initialCameraPosition: CameraPosition(target:LatLng(lat,long),zoom: 14.0),
       mapType: MapType.normal,
       circles: circles,
       markers: placedata.markers,
