@@ -9,7 +9,7 @@ class MovieDetailHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var placedata = Provider.of<Places>(context, listen: false);
-    // print("=========${placedata.d.photos[0]['photo_reference']}");
+
     var movieInformation = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

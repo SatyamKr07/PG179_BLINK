@@ -56,7 +56,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
               }
               if (val == 2) {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NearbyPlaces()));
+                    MaterialPageRoute(builder: (context) => NearbyPlaces()));
               }
             },
             icon: Icon(Icons.more_vert),
@@ -70,7 +70,8 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 value: 1,
               ),
               PopupMenuItem(
-                child: Text(AppTranslations.of(context).text("See Nearby places")),
+                child:
+                    Text(AppTranslations.of(context).text("See Nearby places")),
                 value: 2,
               ),
             ],

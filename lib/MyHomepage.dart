@@ -14,12 +14,23 @@ import './Ghatitem.dart';
 import 'package:geolocator/geolocator.dart';
 import './location.dart';
 
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:get/get.dart';
+import 'package:maps/MyPlaces.dart';
+import 'package:google_maps_webservice/places.dart';
+
 class MyHomePage extends StatefulWidget {
   String id;
   MyHomePage(this.id);
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
+const kGoogleApiKey = "AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo";
+// const kGoogleApiKey = "AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo";
+
+GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
 class _MyHomePageState extends State<MyHomePage> {
   double lat;
@@ -96,6 +107,30 @@ class _MyHomePageState extends State<MyHomePage> {
         onResume: (_) async {});
   }
 
+  Future<Null> displayPrediction(Prediction p) async {
+    if (p != null) {
+      // var addresses = await Geocoder.local.findAddressesFromQuery(query);
+
+      print('place typed is===== ${p.description}');
+      PlacesDetailsResponse detail =
+          await _places.getDetailsByPlaceId(p.placeId);
+
+      var placeId = p.placeId;
+      double latitude = detail.result.geometry.location.lat;
+      double longitude = detail.result.geometry.location.lng;
+
+      // var address =
+      //     await Geocoder.local.findAddressesFromQuery(p.description);
+
+      print(latitude);
+      print(longitude);
+
+      Get.to(SeeGhats(p.description));
+      // Places place = Places();
+      // place.fetch(latitude, longitude);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final placedata = Provider.of<Places>(context, listen: true);
@@ -112,7 +147,18 @@ class _MyHomePageState extends State<MyHomePage> {
           ? AppDrawer(placedata.user)
           : Container(),
       appBar: AppBar(
-        title: Text(AppTranslations.of(context).text("appbar_title")),
+        title: TextField(
+            obscureText: false,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Type Place to search ghats!',
+            ),
+            onTap: () async {
+              Prediction p = await PlacesAutocomplete.show(
+                  context: context, apiKey: kGoogleApiKey);
+              displayPrediction(p);
+            }),
+        // title: Text(AppTranslations.of(context).text("appbar_title")),
         actions: <Widget>[
           PopupMenuButton(
             onSelected: (int val) {
