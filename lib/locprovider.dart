@@ -19,8 +19,8 @@ class Location {
 
 class Places extends ChangeNotifier {
   List<dynamic> _places = List<dynamic>();
-  List<dynamic> _reviews=List<dynamic>();
-  List<dynamic> _broad=List<dynamic>();
+  List<dynamic> _reviews = List<dynamic>();
+  List<dynamic> _broad = List<dynamic>();
   User u;
   Details d;
   double _lat;
@@ -29,10 +29,11 @@ class Places extends ChangeNotifier {
   List<dynamic> get items {
     if (_places != null) return [..._places];
   }
+
   List<dynamic> get reviews {
-    if(_reviews != null) return [..._reviews];
+    if (_reviews != null) return [..._reviews];
   }
-  
+
   User get user {
     return u;
   }
@@ -55,11 +56,13 @@ class Places extends ChangeNotifier {
     _long = longitude;
     _markers.add(Marker(
         markerId: MarkerId('Your location'),
-        position: LatLng(25.321684, 82.9872839),
+        position: LatLng(latitude, longitude),
+        // position: LatLng(25.321684, 82.9872839),
         infoWindow: InfoWindow(title: 'Your location'),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose)));
     final url =
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.321684,82.987289&radius=15000&type=hindu_temple&keyword=ghats&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=15000&type=hindu_temple&keyword=ghats&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
+    // 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.321684,82.987289&radius=15000&type=hindu_temple&keyword=ghats&key=AIzaSyCS90XB-jQMIhQbA2C9vzfWKETNaxpjWJo';
     final response = await http.get(url);
     final extracted = json.decode(response.body);
     print('yaaaaaa');
@@ -71,7 +74,7 @@ class Places extends ChangeNotifier {
           data['geometry']['location']['lng'],
           data['rating'],
           data['place_id'],
-          data['photos'][0]['photo_reference']));
+          data['photos'][0]['photo_reference'] ?? ''));
       _markers.add(Marker(
           markerId: MarkerId(data['place_id']),
           position: LatLng(data['geometry']['location']['lat'],
@@ -100,16 +103,16 @@ class Places extends ChangeNotifier {
     print(result['reviews'][3]);
 
     d = Details(
-      result['formatted_address'],
-      result['reviews'],
-      result['photos'],
-      result['rating'],
-      result['name'],
-      result['geometry']['location']['lat'],
-      result['geometry']['location']['lng']
-    );
-    DocumentSnapshot d1=await Firestore.instance.collection('General').document(id).get();
-    _reviews=d1['reviewedby'];
+        result['formatted_address'],
+        result['reviews'],
+        result['photos'],
+        result['rating'],
+        result['name'],
+        result['geometry']['location']['lat'],
+        result['geometry']['location']['lng']);
+    DocumentSnapshot d1 =
+        await Firestore.instance.collection('General').document(id).get();
+    _reviews = d1['reviewedby'];
 
     notifyListeners();
   }
