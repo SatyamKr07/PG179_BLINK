@@ -107,11 +107,11 @@ class AppDrawer extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.person),
           title: Text('Logout'),
-          onTap: () {
+          onTap: () async {
             placedata.clear();
             placedata.markers.clear();
-            googlesignin.signOut().then((_) {
-              Navigator.push(
+            await googlesignin?.signOut()?.then((_) {
+              Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => Login()));
             });
           },

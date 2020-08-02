@@ -17,7 +17,7 @@ class StartState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    googleSignIn.signInSilently(suppressErrors: false).then((account) {
+    googleSignIn?.signInSilently(suppressErrors: false)?.then((account) {
       handleSignin(account);
     });
   }
