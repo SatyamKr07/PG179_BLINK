@@ -133,9 +133,9 @@ class _LoginState extends State<Login> {
         context, MaterialPageRoute(builder: (context) => MyHomePage(user.id)));
   }
 
-  void login() {
+  void login() async {
     print('hii');
-    googleSignIn.signIn().then((_) {
+    await googleSignIn?.signIn()?.then((_) {
       create();
     });
   }
