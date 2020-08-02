@@ -14,7 +14,7 @@ class Storyline extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${placedata.d.reviews[0]['author_name']}    ${placedata.d.reviews[0]['relative_time_description']}',
+          '${placedata?.d?.reviews[0]['author_name']}    ${placedata.d.reviews[0]['relative_time_description']}',
           style: textTheme.subhead.copyWith(fontSize: 18.0),
         ),
         SizedBox(height: 8.0),

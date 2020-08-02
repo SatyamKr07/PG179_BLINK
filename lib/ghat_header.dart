@@ -4,22 +4,18 @@ import './locprovider.dart';
 import './arc_banner.dart';
 import './poster.dart';
 import './rating_info.dart';
+
 class MovieDetailHeader extends StatelessWidget {
- 
-
-
-
   @override
   Widget build(BuildContext context) {
-    var placedata=Provider.of<Places>(context,listen:false);
-    
+    var placedata = Provider.of<Places>(context, listen: false);
 
     var movieInformation = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           placedata.d.name,
-          style: TextStyle(fontSize: 20,color: Colors.black54),
+          style: TextStyle(fontSize: 20, color: Colors.black54),
         ),
         SizedBox(height: 8.0),
         RatingInformation(),
