@@ -60,7 +60,7 @@ class LocalisedAppState extends State<LocalisedApp> {
             const Locale("en", ""),
             const Locale("es", ""),
           ],
-          routes: {LocationInput.routeName: (ctx) => LocationInput()},
+         
         ));
   }
 

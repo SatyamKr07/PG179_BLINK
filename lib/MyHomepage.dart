@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:maps/AppTranslation.dart';
 import 'package:maps/Application.dart';
+import 'package:maps/Seeotherghats.dart';
 import 'package:maps/location.dart';
 import 'package:maps/main.dart';
 import './AppDrawer.dart';
@@ -122,12 +123,59 @@ void configurepush()
             placedata.markers.clear();
              googlesignin.signOut().then((_) {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-             }); 
+             });
+            } 
+             if(val==2)
+             {String s;
+               showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(20.0)), //this right here
+            child: Container(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter the name or the location of the place'),
+                          onChanged: (val) {
+                            s=val;
+                          },
+                    ),
+                    SizedBox(
+                      width: 320.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => SeeGhats(s)));
+                        },
+                        child: Text(
+                          "Search..",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: const Color(0xFF1BC0C5),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+             }
              
-          }
           },
           icon: Icon(Icons.more_vert),itemBuilder: (_)
-          => [PopupMenuItem(child: Text('Logout'),value: 0,),],
+          => [PopupMenuItem(child: Text('Logout'),value: 0,),
+          PopupMenuItem(child: Text('See more Ghats'),value: 2)],
+          
         ),
          PopupMenuButton<String>(
               // overflow menu
@@ -143,6 +191,7 @@ void configurepush()
                 }).toList();
               },
             ),
+            
         ],
       ),
       body:(lat != null && placedata.items.length != 0) ? 
@@ -156,9 +205,11 @@ void configurepush()
         ,
         floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(
-            LocationInput.routeName
-          );},
+          Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => LocationInput(lat,long)),
+  );
+          },
         
         tooltip: 'Map view',
         child: Icon(Icons.map),
