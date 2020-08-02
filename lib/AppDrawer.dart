@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:maps/ActivityFeed.dart';
 import 'package:maps/Application.dart';
 import 'package:maps/RegisteredEvents.dart';
 import 'package:maps/add_new_place.dart';
+import 'package:maps/locprovider.dart';
+import 'package:maps/main.dart';
 import 'package:maps/youractivity.dart';
+import 'package:provider/provider.dart';
 import './Userclass.dart';
 
 class AppDrawer extends StatelessWidget {
   final User u;
   AppDrawer(this.u);
+  final googlesignin = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
+    final placedata = Provider.of<Places>(context, listen: true);
+
     return Drawer(
         child: Column(
       children: <Widget>[
@@ -95,6 +102,18 @@ class AppDrawer extends StatelessWidget {
           title: Text('Add new places'),
           onTap: () {
             Get.to(AddNewPlace());
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Text('Logout'),
+          onTap: () {
+            placedata.clear();
+            placedata.markers.clear();
+            googlesignin.signOut().then((_) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Login()));
+            });
           },
         )
       ],
