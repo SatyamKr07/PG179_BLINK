@@ -61,7 +61,6 @@ class LocalisedAppState extends State<LocalisedApp> {
             const Locale("en", ""),
             const Locale("es", ""),
           ],
-         
         ));
   }
 
@@ -151,15 +150,24 @@ class _LoginState extends State<Login> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              child: Image.network(
-                  'https://images.unsplash.com/photo-1518050947974-4be8c7469f0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                  fit: BoxFit.fill,
-                  color: Color.fromRGBO(255, 255, 255, 0.6),
-                  colorBlendMode: BlendMode.modulate),
+              child:
+                  // Image.asset('assets/g1.jpg')
+                  Image.network(
+                      'https://images.unsplash.com/photo-1518050947974-4be8c7469f0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                      fit: BoxFit.fill,
+                      color: Color.fromRGBO(255, 255, 255, 0.6),
+                      colorBlendMode: BlendMode.modulate),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Text(
+                  "Welcome to Know Your Ghats!",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 10.0),
                 Container(
                     width: 250.0,
@@ -186,58 +194,58 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () => login()),
                     )),
-                Container(
-                    width: 250.0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Color(0xffffffff),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(
-                              FontAwesomeIcons.facebookF,
-                              color: Color(0xff4754de),
-                            ),
-                            SizedBox(width: 10.0),
-                            Text(
-                              'Sign in with Facebook',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 18.0),
-                            ),
-                          ],
-                        ),
-                        onPressed: () {},
-                      ),
-                    )),
-                Container(
-                    width: 250.0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Color(0xffffffff),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(
-                              FontAwesomeIcons.solidEnvelope,
-                              color: Color(0xff4caf50),
-                            ),
-                            SizedBox(width: 10.0),
-                            Text(
-                              'Sign in with Email',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 18.0),
-                            ),
-                          ],
-                        ),
-                        onPressed: () {},
-                      ),
-                    )),
+                // Container(
+                //     width: 250.0,
+                //     child: Align(
+                //       alignment: Alignment.center,
+                //       child: RaisedButton(
+                //         shape: RoundedRectangleBorder(
+                //             borderRadius: new BorderRadius.circular(30.0)),
+                //         color: Color(0xffffffff),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           children: <Widget>[
+                //             Icon(
+                //               FontAwesomeIcons.facebookF,
+                //               color: Color(0xff4754de),
+                //             ),
+                //             SizedBox(width: 10.0),
+                //             Text(
+                //               'Sign in with Facebook',
+                //               style: TextStyle(
+                //                   color: Colors.black, fontSize: 18.0),
+                //             ),
+                //           ],
+                //         ),
+                //         onPressed: () {},
+                //       ),
+                //     )),
+                // Container(
+                //     width: 250.0,
+                //     child: Align(
+                //       alignment: Alignment.center,
+                //       child: RaisedButton(
+                //         shape: RoundedRectangleBorder(
+                //             borderRadius: new BorderRadius.circular(30.0)),
+                //         color: Color(0xffffffff),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           children: <Widget>[
+                //             Icon(
+                //               FontAwesomeIcons.solidEnvelope,
+                //               color: Color(0xff4caf50),
+                //             ),
+                //             SizedBox(width: 10.0),
+                //             Text(
+                //               'Sign in with Email',
+                //               style: TextStyle(
+                //                   color: Colors.black, fontSize: 18.0),
+                //             ),
+                //           ],
+                //         ),
+                //         onPressed: () {},
+                //       ),
+                //     )),
               ],
             ),
           ],

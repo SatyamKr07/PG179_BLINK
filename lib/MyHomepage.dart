@@ -147,89 +147,88 @@ class _MyHomePageState extends State<MyHomePage> {
           ? AppDrawer(placedata.user)
           : Container(),
       appBar: AppBar(
-        title: TextField(
-            obscureText: false,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Type Place to search ghats!',
-            ),
-            onTap: () async {
-              Prediction p = await PlacesAutocomplete.show(
-                  context: context, apiKey: kGoogleApiKey);
-              displayPrediction(p);
-            }),
-        // title: Text(AppTranslations.of(context).text("appbar_title")),
+        title: Text(AppTranslations.of(context).text("appbar_title")),
         actions: <Widget>[
-          PopupMenuButton(
-            onSelected: (int val) {
-              if (val == 0) {
-                placedata.clear();
-                placedata.markers.clear();
-                googlesignin.signOut().then((_) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                });
-              }
-              if (val == 2) {
-                String s;
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(20.0)), //this right here
-                        child: Container(
-                          height: 200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText:
-                                          'Enter the name or the location of the place'),
-                                  onChanged: (val) {
-                                    s = val;
-                                  },
-                                ),
-                                SizedBox(
-                                  width: 320.0,
-                                  child: RaisedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SeeGhats(s)));
-                                    },
-                                    child: Text(
-                                      "Search..",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    color: const Color(0xFF1BC0C5),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    });
-              }
-            },
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (_) => [
-              PopupMenuItem(
-                child: Text('Logout'),
-                value: 0,
+          IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
               ),
-              PopupMenuItem(child: Text('See more Ghats'), value: 2)
-            ],
-          ),
+              onPressed: () async {
+                Prediction p = await PlacesAutocomplete.show(
+                    context: context, apiKey: kGoogleApiKey);
+                displayPrediction(p);
+              }),
+          // PopupMenuButton(
+          //   onSelected: (int val) {
+          //     if (val == 0) {
+          //       placedata.clear();
+          //       placedata.markers.clear();
+          //       googlesignin.signOut().then((_) {
+          //         Navigator.push(context,
+          //             MaterialPageRoute(builder: (context) => Login()));
+          //       });
+          //     }
+          //     if (val == 2) {
+          //       String s;
+          //       showDialog(
+          //           context: context,
+          //           builder: (BuildContext context) {
+          //             return Dialog(
+          //               shape: RoundedRectangleBorder(
+          //                   borderRadius:
+          //                       BorderRadius.circular(20.0)), //this right here
+          //               child: Container(
+          //                 height: 200,
+          //                 child: Padding(
+          //                   padding: const EdgeInsets.all(12.0),
+          //                   child: Column(
+          //                     mainAxisAlignment: MainAxisAlignment.center,
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       TextField(
+          //                         decoration: InputDecoration(
+          //                             border: InputBorder.none,
+          //                             hintText:
+          //                                 'Enter the name or the location of the place'),
+          //                         onChanged: (val) {
+          //                           s = val;
+          //                         },
+          //                       ),
+          //                       SizedBox(
+          //                         width: 320.0,
+          //                         child: RaisedButton(
+          //                           onPressed: () {
+          //                             Navigator.push(
+          //                                 context,
+          //                                 MaterialPageRoute(
+          //                                     builder: (context) =>
+          //                                         SeeGhats(s)));
+          //                           },
+          //                           child: Text(
+          //                             "Search..",
+          //                             style: TextStyle(color: Colors.white),
+          //                           ),
+          //                           color: const Color(0xFF1BC0C5),
+          //                         ),
+          //                       )
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ),
+          //             );
+          //           });
+          //     }
+          //   },
+          //   icon: Icon(Icons.more_vert),
+          //   itemBuilder: (_) => [
+          //     PopupMenuItem(
+          //       child: Text('Logout'),
+          //       value: 0,
+          //     ),
+          //     PopupMenuItem(child: Text('See more Ghats'), value: 2)
+          //   ],
+          // ),
           PopupMenuButton<String>(
             // overflow menu
             onSelected: _select,
