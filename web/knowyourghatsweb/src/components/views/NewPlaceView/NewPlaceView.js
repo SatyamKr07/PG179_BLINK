@@ -1,10 +1,13 @@
 import React from 'react';
 import { MDBContainer, MDBMask, MDBCard, MDBCardBody, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 import Map from "./Map";
+import { firestore } from "../../../firebase";
+import history from "../../../history";
 
 const NewPlaceView = (props) => {
     const ob = props.location.myCustomProps;
     //console.log(ob);
+    const db = firestore;
     return (
         <MDBContainer className="align-content-lg-center" style={{ marginTop: "20px"}}>
             <MDBCard className="w-100">
@@ -16,7 +19,7 @@ const NewPlaceView = (props) => {
                         </span>              
                         <span className="grey-text pr-3" style={{marginRight: "6px"}}>
                             <MDBIcon icon="clock" className="grey-text pr-2" />
-                            10/03/2020
+                            {ob.date}
                         </span>
                     </div>
                     <MDBView hover className="rounded mb-4" waves>
@@ -39,11 +42,35 @@ const NewPlaceView = (props) => {
                         </strong>
                     </p>    
                     <div style={{position: 'relative', marginLeft: "40px"}}>
-                        <Map style={{position: 'relative'}}/>
+                        <Map style={{position: 'relative'}} latitude={ob.latitude} longitude={ob.longitude} />
                     </div>
                     <div className="text-center">
-                    <MDBBtn style={{marginRight: "15px"}} className="success">Accept</MDBBtn>
-                    <MDBBtn  style={{marginLeft: "15px"}} color="danger">Decline</MDBBtn>
+                    <MDBBtn style={{marginRight: "15px"}} className="success" onClick={() => {
+                        var postid = ob.postid;
+                        var newPlaceRef = db.collection("AddPlaces").doc(postid);
+                        return newPlaceRef.update({
+                            reviewed: 1
+                        })
+                        .then(function() {
+                            console.log("Document successfully updated!");
+                        })
+                        .catch(function(error) {
+                            console.error("Error updating document: ", error);
+                        });
+                    }}>Accept</MDBBtn>
+                    <MDBBtn  style={{marginLeft: "15px"}} color="danger" onClick={() => {
+                        var postid = ob.postid;
+                        var newPlaceRef = db.collection("AddPlaces").doc(postid);
+                        return newPlaceRef.update({
+                            reviewed: -1
+                        })
+                        .then(function() {
+                            history.push("/newplaces")
+                        })
+                        .catch(function(error) {
+                            console.error("Error updating document: ", error);
+                        });
+                    }}>Decline</MDBBtn>
                     </div>
                     
                 </MDBCardBody>

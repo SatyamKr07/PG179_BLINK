@@ -6,6 +6,7 @@ import ComplaintView from './views/ComplaintView/ComplaintView';
 import Home from './views/Home/Home';
 import NewPlaces from './views/NewPlaces/NewPlaces';
 import NewPlaceView from './views/NewPlaceView/NewPlaceView';
+import Createpost from './views/Addposts/Createpost';
 import Header from './Header';
 import history from '../history';
 
@@ -22,6 +23,7 @@ const Application = () => {
                     <Route path = "/newplace/:id" exact component={NewPlaceView} />
                     <Route path = "/complaints" exact component={Complaints} />
                     <Route path = "/complaint/:id" exact component={ComplaintView} />
+                    <Route path = "/createpost" exact component = {Createpost} />
                 </Switch>
             </div>
         </Router>

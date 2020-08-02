@@ -23,7 +23,7 @@ const DisplayCard = (props) => {
                         {props.cardVal.upvotes.length}
                     </span>   
                     <span className="float-right"  style={{padding: 6}}>
-                        10/08/2020
+                        {props.cardVal.date}
                     </span>
                 </div>
                 <br />

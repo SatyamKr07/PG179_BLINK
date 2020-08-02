@@ -16,10 +16,13 @@ class Complaints extends Component {
                     snapshot.forEach((complaint) => {
                        // console.log(`${complaint.id} => ${complaint.data().name}`);
                         newState.push({
+                                    date: complaint.data().date.toDate().toDateString(),
                                     ghatid: complaint.data().ghatid,
                                     id: complaint.data().id,
                                     image: complaint.data().image,
                                     //location: complaint.data().location,
+                                    latitude: complaint.data().latitude,
+                                    longitude: complaint.data().longitude,
                                     name: complaint.data().name,
                                     photo: complaint.data().photo,
                                     postid: complaint.data().postid,
@@ -39,7 +42,7 @@ class Complaints extends Component {
             <MDBRow className="row d-flex ">
             {this.state.complaints.map( (complaint) => {
                 return(
-                    <MDBCol md="4" sm="6" xs="12" className="mb-lg-0 mb-4" key={complaint.id}>
+                    <MDBCol md="4" sm="6" xs="12" className="mb-lg-0 mb-4" key={complaint.postid}>
                         <DisplayCard cardVal = {complaint} />
                     </MDBCol>
                 );

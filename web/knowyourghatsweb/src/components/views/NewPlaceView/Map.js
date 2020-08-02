@@ -39,6 +39,15 @@ const mapStyles = {
       }
     };
     render() {
+      //console.log(this.props.latitude)
+      //console.log(this.props.longitude)
+      // const lat = parseFloat(this.props.latitude)
+      // console.log(lat)
+      // const lati = parseFloat(this.props.latitude.value);
+      // const long = parseFloat(this.props.longitude.value);
+      // console.log(typeof this.props.latitude)
+      // const meh = parseFloat(this.props.latitude.value)
+      // console.log(typeof meh)
       return (
         
         <Map
@@ -47,8 +56,8 @@ const mapStyles = {
           containerStyle={containerStyle}
           style={mapStyles}
           initialCenter={{
-           lat: 25.312887,
-           lng: 83.016122
+           lat: parseFloat(this.props.latitude),
+           lng: parseFloat(this.props.longitude)
           }}
         >
         <Marker

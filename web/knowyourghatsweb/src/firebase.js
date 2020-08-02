@@ -47,3 +47,4 @@ const getUserDocument = async uid => {
 //export const generateUserDocument = generateUserDocument();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const firestore = firebase.firestore();

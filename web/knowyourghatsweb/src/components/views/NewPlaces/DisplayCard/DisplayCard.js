@@ -1,50 +1,62 @@
-import React from "react";
-import { MDBMask, MDBCard, MDBCardBody, MDBView, MDBBtn } from "mdbreact";
-import { Link } from 'react-router-dom';
-import "./DisplayCard.css"
+import React, { Component } from 'react';
+import DisplayCard from "./DisplayCard/DisplayCard";
+import {  MDBRow, MDBCol,  MDBContainer } from "mdbreact";
+import { firestore } from "../../../firebase";
 
-const DisplayCard = (props) => {
-    return (
-        
-        <MDBCard style={{border: "none", margin: "10px"}}>
-            <MDBCardBody className="text-center">
-                <MDBView hover className="rounded mb-4" waves>
-                    <img
-                        style={{height: "40vh", width: "100%"}}
-                        className="img-fluid"
-                        src={props.cardVal.image}
-                        alt=""
-                    />
-                    <MDBMask overlay="white-slight" />
-                </MDBView>
-                <div>
-                    {/* <span className="float-left">
-                        <MDBIcon icon="heart" style={{padding: 8}}/>
-                        {props.cardVal.upvotes.length}
-                    </span>    */}
-                    <span className="float-right"  style={{padding: 6}}>
-                        10/08/2020
-                    </span>
-                </div>
-                <br />
-                <div className="text-justify text-center">
-                    <p style={{marginTop: "20px"}} className="dark-grey-text text-concat">
-                        {props.cardVal.review}
-                    </p>                                                             
-                </div>       
-                <Link to={
-                    { 
-                        pathname: `/newplace/${props.cardVal.id}`,
-                        myCustomProps: props.cardVal
-                    }} style={{ textDecoration: 'none' }}>
-                        <MDBBtn className="float-none" color="purple darken-3" rounded size="md">
-                        View more
-                        </MDBBtn>
-                </Link>            
-                
-            </MDBCardBody>
-        </MDBCard>
-    );
+class NewPlaces extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            newplaces : []
+        };
+    };
+
+    componentDidMount(){
+        var db = firestore;
+        db.collection("AddPlaces").get().then((snapshot) => {
+            const newState = [];
+            snapshot.forEach((newplace) => {
+                //console.log(`${newplace.id} => ${newplace.data().name}`);
+                newState.push({
+                            date: newplace.data().date.toDate().toDateString(),
+                            id: newplace.data().id,
+                            image: newplace.data().image,
+                            location: newplace.data().location,
+                            longlat: newplace.data().longlat,
+                            longitude: newplace.data().longlat.substring(22,31),
+                            latitude: newplace.data().longlat.substring(5,14),
+                            name: newplace.data().name,
+                            photo: newplace.data().photo,
+                            postid: newplace.data().postid,
+                            review: newplace.data().review,
+                            reviewed: newplace.data().reviewed
+                        });
+                this.setState({
+                newplaces : newState
+                });
+            });
+        });
+    };
+
+    render() {
+        return (
+            <MDBContainer fluid style={{ marginTop: "20px"}}>
+            <MDBRow className="row d-flex ">
+            {this.state.newplaces.map( (newplace) => {
+                if(newplace.reviewed === 0)
+                {
+                    return(
+                        <MDBCol md="4" sm="6" xs="12" className="mb-lg-0 mb-4" key={newplace.postid}>
+                            <DisplayCard cardVal = {newplace} />
+                        </MDBCol>
+                    );
+                }
+            })}
+            </MDBRow>
+        </MDBContainer>
+        );
+    }
 }
 
-export default DisplayCard;
+
+export default NewPlaces;

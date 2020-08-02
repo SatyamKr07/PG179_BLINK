@@ -16,7 +16,7 @@ const ComplaintView = (props) => {
                         </span>              
                         <span className="grey-text pr-3" style={{marginRight: "6px"}}>
                             <MDBIcon icon="clock" className="grey-text pr-2" />
-                            10/03/2020
+                            {ob.date}
                         </span>
                         <span className="grey-text pr-3" style={{marginRight: "6px"}}>
                             <MDBIcon icon="heart" className="grey-text pr-2" />
@@ -43,7 +43,7 @@ const ComplaintView = (props) => {
                         </strong>
                     </p>    
                     <div style={{position: 'relative', marginLeft: "40px"}}>
-                        <Map style={{position: 'relative'}}/>
+                        <Map style={{position: 'relative'}} latitude={ob.latitude} longitude={ob.longitude}/>
                     </div>
                     <div className="text-center">
                     <MDBBtn style={{marginLeft: "40px"}} className="success">Resolved</MDBBtn>

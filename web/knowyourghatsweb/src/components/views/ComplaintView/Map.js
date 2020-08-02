@@ -47,8 +47,8 @@ const mapStyles = {
           containerStyle={containerStyle}
           style={mapStyles}
           initialCenter={{
-           lat: 25.312887,
-           lng: 83.016122
+           lat: this.props.latitude,
+           lng: this.props.longitude
           }}
         >
         <Marker
@@ -75,3 +75,5 @@ const mapStyles = {
   })(MapView);
 
 
+
+  
