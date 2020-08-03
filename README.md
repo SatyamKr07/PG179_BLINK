@@ -1,6 +1,6 @@
-# maps
+# Know Your Ghats
 
-A new Flutter project.
+User Friendly app made with Flutter!
 
 ## Getting Started
 
