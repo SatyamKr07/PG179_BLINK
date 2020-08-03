@@ -3,6 +3,7 @@ import 'package:maps/Application.dart';
 import 'package:maps/alleventsdisplay.dart';
 import 'package:maps/locprovider.dart';
 import 'package:maps/user_review.dart';
+import 'package:maps/vendors.dart';
 import './ghat_header.dart';
 import './hostevent.dart';
 import './NearbyPlaces.dart';
@@ -58,6 +59,11 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => NearbyPlaces()));
               }
+              if(val==3)
+              {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Vendors()));
+              }
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
@@ -74,6 +80,11 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                     Text(AppTranslations.of(context).text("See Nearby places")),
                 value: 2,
               ),
+              PopupMenuItem(
+                child:
+                    Text(AppTranslations.of(context).text("Local vendors")),
+                value: 3,
+              )
             ],
           ),
         ],
