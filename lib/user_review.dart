@@ -30,6 +30,15 @@ class _UserReviewState extends State<UserReview> {
   List<bool> selected=[];
   bool selected8=false;
   bool selected9=false;
+  bool selected10=false;
+  bool selected11=false;
+  bool selected12=false;
+  bool selected13=false;
+  bool selected14=false;
+  bool selected15=false;
+  bool selected16=false;
+  bool selected17=false;
+  bool selected18=false;
   String answer1="Dont know";String answer2="Dont know";String answer3="Dont know";
   var myFeedbackText = "COULD BE BETTER";
   var sliderValue = 0.0;
@@ -208,6 +217,9 @@ class _UserReviewState extends State<UserReview> {
         doesThisGhatHas("1. Dustbin"),
         doesThisGhatHas2("2. Toilet"),
         doesThisGhatHas3("3. Cremation"),
+        doesThisGhatHas4("4. Women and child care facilities"),
+        doesThisGhatHas5("5. Seperate washrooms"),
+        doesThisGhatHas6("6. CCTVs"),
         SizedBox(height: 20),
         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -696,7 +708,260 @@ class _UserReviewState extends State<UserReview> {
       ),
     );
   }
+  doesThisGhatHas4(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 10.0),
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected10) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected10=true;
+           selected11 = !true;
+           selected12 = !true;
+        });
+      },
+      child: Text("YES"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected11) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected11=true;
+           selected10 = !true;
+           selected12 = !true;
+        });
+      },
+      child: Text("NO"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected12) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected12=true;
+           selected11= false;
+           selected10 = false;
+        });
+      },
+      child: Text("Dont Know"),
+      
+    ),
+  ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+   doesThisGhatHas5(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 10.0),
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected13) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected13=true;
+           selected14 = !true;
+           selected15 = !true;
+        });
+      },
+      child: Text("YES"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected14) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected14=true;
+           selected13 = !true;
+           selected15 = !true;
+        });
+      },
+      child: Text("NO"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected15) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected15=true;
+           selected14= false;
+           selected13 = false;
+        });
+      },
+      child: Text("Dont Know"),
+      
+    ),
+  ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+   doesThisGhatHas6(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 10.0),
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected16) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected16=true;
+           selected17 = !true;
+           selected18 = !true;
+        });
+      },
+      child: Text("YES"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected17) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected17=true;
+           selected16 = !true;
+           selected18 = !true;
+        });
+      },
+      child: Text("NO"),
+      
+    ),
+  ),
+              Container(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    decoration: BoxDecoration(
+      border: (!selected18) ? Border.all(width: 1.0, color: Colors.grey) :Border.all(width: 3.0, color: Colors.blueAccent),
+      borderRadius: BorderRadius.all(
+          Radius.circular(100.0) //                 <--- border radius here
+          ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+           selected18=true;
+           selected17= false;
+           selected16 = false;
+        });
+      },
+      child: Text("Dont Know"),
+      
+    ),
+  ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
+ 
 
 
 

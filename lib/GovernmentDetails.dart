@@ -9,6 +9,8 @@ class GovernmentDetails extends StatefulWidget {
 
 class _GovernmentDetailsState extends State<GovernmentDetails> {
   final DocumentSnapshot d;
+  TextEditingController textEditingController=new TextEditingController();
+  TextEditingController textEditingController2=new TextEditingController();
   _GovernmentDetailsState(this.d);
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,37 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
         padding: EdgeInsets.symmetric(vertical: 16.0),
         width: MediaQuery.of(context).size.width,
         child: RaisedButton(
-          onPressed: () => {},
+          onPressed: () => {
+             showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Details'),
+            content: Container(height: 300,child:Column(children:<Widget>[
+              Text('Please enter your phone number')
+              ,TextField(
+              controller: textEditingController,
+              decoration: InputDecoration(hintText: "Your phone number"),
+            ),
+            SizedBox(height: 10,),
+            Text('Please specify how are you going to contribute toward this project\n1.Raising funds\n2.Work on field\n3.advertise about this project\n4.any other valid reason'),
+            TextField(
+              controller: textEditingController2,
+              decoration: InputDecoration(hintText: "Description"),
+            )
+            ])),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('SUBMIT'),
+                onPressed: () {
+                  AlertDialog(title: Text('Thank you very much'),
+                  content: Text('Your response has been recorded,A government official will soon contact you'),);
+                },
+              )
+            ],
+          );
+        })
+          },
           color: Color.fromRGBO(58, 66, 86, 1.0),
           child:
               Text("Join the project", style: TextStyle(color: Colors.white)),
