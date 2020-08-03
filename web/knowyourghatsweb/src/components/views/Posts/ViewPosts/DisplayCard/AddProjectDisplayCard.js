@@ -3,11 +3,11 @@ import { MDBCard, MDBCardBody, MDBView } from "mdbreact";
 import { Link } from 'react-router-dom';
 import "./DisplayCard.css"
 
-const DisplayCard = (props) => {
+const AddProjectDisplayCard = (props) => {
     return (
         <Link to={
             { 
-                pathname: `/viewpost/${props.cardVal.id}`,
+                pathname: "/createpost",
                 myCustomProps: props.cardVal
             }} style={{ textDecoration: 'none' }}>
             <MDBCard waves className="hoverable z-depth-1" style={{ marginBottom: "40px"}}>
@@ -16,7 +16,7 @@ const DisplayCard = (props) => {
                         <img
                             style={{height: "40vh", width: "100%"}}
                             className="img-fluid"
-                            src={props.cardVal.image}
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png"
                             alt=""
                         />
                         
@@ -24,7 +24,7 @@ const DisplayCard = (props) => {
                     <br /> 
                     <div className="text-justify text-center">
                         <p style={{marginBottom: "15px", fontSize: "1.4rem"}} className="black-text">
-                            {props.cardVal.title}
+                            ADD NEW PROJECT
                         </p>                                                             
                     </div>       
                 </MDBCardBody>
@@ -33,4 +33,4 @@ const DisplayCard = (props) => {
     );
 }
 
-export default DisplayCard;
+export default AddProjectDisplayCard;

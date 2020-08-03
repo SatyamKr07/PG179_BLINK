@@ -53,6 +53,7 @@ const NewPlaceView = (props) => {
                         })
                         .then(function() {
                             console.log("Document successfully updated!");
+                            history.push("/newplaces")
                         })
                         .catch(function(error) {
                             console.error("Error updating document: ", error);
@@ -65,6 +66,7 @@ const NewPlaceView = (props) => {
                             reviewed: -1
                         })
                         .then(function() {
+                            console.log("Document successfully updated!");
                             history.push("/newplaces")
                         })
                         .catch(function(error) {

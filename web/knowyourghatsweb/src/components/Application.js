@@ -27,7 +27,7 @@ const Application = () => {
                     <Route path = "/complaint/:id" exact component={ComplaintView} />
                     <Route path = "/createpost" exact component = {Createpost} />
                     <Route path = "/viewposts" exact component = {ViewPosts} />
-                    <Route path = "/viewposts/:id" exact component = {ViewPost} />
+                    <Route path = "/viewpost/:id" exact component = {ViewPost} />
                 </Switch>
             </div>
         </Router>

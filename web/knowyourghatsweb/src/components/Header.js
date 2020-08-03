@@ -58,7 +58,7 @@ class Header extends React.Component {
                                         <MDBNavLink to="/home"><span className="black-text">Home</span></MDBNavLink>
                                         </MDBNavItem>
                                         <MDBNavItem >
-                                            <MDBNavLink to="/createpost"><span className="black-text">Create</span></MDBNavLink>
+                                            <MDBNavLink to="/viewposts"><span className="black-text">Projects</span></MDBNavLink>
                                         </MDBNavItem>
                                     </MDBNavbarNav>
                                     <MDBNavbarNav right>
@@ -66,7 +66,7 @@ class Header extends React.Component {
                                         <MDBNavItem style={{cursor: "pointer"}}  onClick = {() => {auth.signOut().catch(error => {
                               console.error("Error signing out", error);
                             })}}>
-                                        <span className="black-text">LogOut</span>
+                                        <span className="black-text">Logout</span>
                                         </MDBNavItem>
                                     </MDBNavbarNav>
                                 </MDBCollapse>
