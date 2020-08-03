@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 class GovernmentDetails extends StatefulWidget {
   final DocumentSnapshot d;
   GovernmentDetails(this.d);
@@ -9,8 +10,8 @@ class GovernmentDetails extends StatefulWidget {
 
 class _GovernmentDetailsState extends State<GovernmentDetails> {
   final DocumentSnapshot d;
-  TextEditingController textEditingController=new TextEditingController();
-  TextEditingController textEditingController2=new TextEditingController();
+  TextEditingController textEditingController = new TextEditingController();
+  TextEditingController textEditingController2 = new TextEditingController();
   _GovernmentDetailsState(this.d);
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,6 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 120.0),
-        
         Container(
           width: 140.0,
           child: new Divider(color: Colors.green),
@@ -48,7 +48,6 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
           d['title'],
           style: TextStyle(color: Colors.white, fontSize: 30.0),
         ),
-        
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -66,7 +65,7 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
         ),
       ],
     );
-     final topContent = Stack(
+    final topContent = Stack(
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 10.0),
@@ -107,41 +106,52 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
         width: MediaQuery.of(context).size.width,
         child: RaisedButton(
           onPressed: () => {
-             showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Details'),
-            content: Container(height: 300,child:Column(children:<Widget>[
-              Text('Please enter your phone number')
-              ,TextField(
-              controller: textEditingController,
-              decoration: InputDecoration(hintText: "Your phone number"),
-            ),
-            SizedBox(height: 10,),
-            Text('Please specify how are you going to contribute toward this project\n1.Raising funds\n2.Work on field\n3.advertise about this project\n4.any other valid reason'),
-            TextField(
-              controller: textEditingController2,
-              decoration: InputDecoration(hintText: "Description"),
-            )
-            ])),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('SUBMIT'),
-                onPressed: () {
-                  AlertDialog(title: Text('Thank you very much'),
-                  content: Text('Your response has been recorded,A government official will soon contact you'),);
-                },
-              )
-            ],
-          );
-        })
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Details'),
+                    content: Container(
+                        height: 300,
+                        child: ListView(children: <Widget>[
+                          Text('Please enter your phone number'),
+                          TextField(
+                            controller: textEditingController,
+                            decoration:
+                                InputDecoration(hintText: "Your phone number"),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Expanded(
+                              child: Text(
+                                  'Please specify how are you going to contribute toward this project\n1.Raising funds\n2.Work on field\n3.advertise about this project\n4.any other valid reason')),
+                          TextField(
+                            controller: textEditingController2,
+                            decoration:
+                                InputDecoration(hintText: "Description"),
+                          )
+                        ])),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text('SUBMIT'),
+                        onPressed: () {
+                          AlertDialog(
+                            title: Text('Thank you very much'),
+                            content: Text(
+                                'Your response has been recorded,A government official will soon contact you'),
+                          );
+                        },
+                      )
+                    ],
+                  );
+                })
           },
           color: Color.fromRGBO(58, 66, 86, 1.0),
           child:
               Text("Join the project", style: TextStyle(color: Colors.white)),
         ));
-      final bottomContent = Container(
+    final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       // color: Theme.of(context).primaryColor,
@@ -151,12 +161,12 @@ class _GovernmentDetailsState extends State<GovernmentDetails> {
           children: <Widget>[bottomContentText, readButton],
         ),
       ),
-    );  
+    );
     return Scaffold(
-      appBar: AppBar(title:Text('Brief Description')),
-      body:SingleChildScrollView(child:Column(
-        children: <Widget>[topContent, bottomContent],)
-      
-    ));
+        appBar: AppBar(title: Text('Brief Description')),
+        body: SingleChildScrollView(
+            child: Column(
+          children: <Widget>[topContent, bottomContent],
+        )));
   }
 }

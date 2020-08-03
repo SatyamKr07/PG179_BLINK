@@ -37,6 +37,7 @@ class _SeeGhatsState extends State<SeeGhats> {
     }
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           title: Text("Ghats near  " + s),
         ),
         body: (lat != null && placedata?.places2?.length != 0)

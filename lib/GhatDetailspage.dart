@@ -82,10 +82,10 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
               //   Navigator.push(context,
               //       MaterialPageRoute(builder: (context) => NearbyPlaces()));
               // }
-              if (val == 3) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Vendors()));
-              }
+              // if (val == 3) {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => Vendors()));
+              // }
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
@@ -102,10 +102,10 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
               //       Text(AppTranslations.of(context).text("See Nearby places")),
               //   value: 2,
               // ),
-              PopupMenuItem(
-                child: Text(AppTranslations.of(context).text("Local vendors")),
-                value: 3,
-              )
+              // PopupMenuItem(
+              //   child: Text(AppTranslations.of(context).text("Local vendors")),
+              //   value: 3,
+              // )
             ],
           ),
         ],
@@ -126,40 +126,93 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                   SizedBox(height: 20.0),
                   Column(
                     children: <Widget>[
-                      Center(
-                        child: Container(
-                          width: 200.0,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.0)),
-                              color: Colors.blue,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Icon(
-                                    FontAwesomeIcons.mapMarked,
-                                    color: Colors.white,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Center(
+                              child: Container(
+                                width: 160.0,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0)),
+                                    color: Colors.blue,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Icon(
+                                          FontAwesomeIcons.mapMarked,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(width: 10.0),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5.0, bottom: 5),
+                                          child: Text(
+                                            'Map \nNavigation',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onPressed: () => MapUtils.openMap(
+                                      myLatitude: _currentPosition.latitude,
+                                      myLongitude: _currentPosition.longitude,
+                                      destinationLatitude: placedata.d.lat,
+                                      destinationLongitude: placedata.d.long,
+                                    ),
                                   ),
-                                  SizedBox(width: 10.0),
-                                  Text(
-                                    'Take Me There',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18.0),
-                                  ),
-                                ],
-                              ),
-                              onPressed: () => MapUtils.openMap(
-                                myLatitude: _currentPosition.latitude,
-                                myLongitude: _currentPosition.longitude,
-                                destinationLatitude: placedata.d.lat,
-                                destinationLongitude: placedata.d.long,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          Expanded(
+                            child: Center(
+                              child: Container(
+                                width: 150.0,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(30.0)),
+                                      color: Colors.blue,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesomeIcons.shopify,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 10.0),
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5.0, bottom: 5),
+                                              child: Text(
+                                                'Local \nVendors',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        Get.to(Vendors());
+                                      }),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Center(
                         child: Container(
@@ -180,7 +233,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'See nearby Places',
+                                      'Search nearby Places',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18.0),
                                     ),

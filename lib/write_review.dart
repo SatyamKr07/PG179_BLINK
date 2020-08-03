@@ -133,7 +133,7 @@ class _WriteReviewState extends State<WriteReview> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    "Rate Cleaniness of ghat",
+                    "Overall rating of ghat",
                     style: TextStyle(fontSize: 16),
                   ),
                   Center(
