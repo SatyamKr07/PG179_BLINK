@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:maps/Application.dart';
 import 'package:maps/alleventsdisplay.dart';
 import 'package:maps/locprovider.dart';
+import 'package:maps/open_map.dart';
 import 'package:maps/user_review.dart';
 import './ghat_header.dart';
 import './hostevent.dart';
@@ -22,6 +25,9 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
   final String id;
   int count = 0;
   bool isloading = true;
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  Position _currentPosition;
+  String _currentAddress = '';
   _GhatDetailsPageState(this.id);
   @override
   void initState() {
@@ -30,6 +36,21 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
       setState(() {
         isloading = false;
       });
+    });
+    _getCurrentLocation();
+  }
+
+  _getCurrentLocation() async {
+    await geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      // _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
     });
   }
 
@@ -82,6 +103,8 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   MovieDetailHeader(),
                   Padding(
@@ -89,6 +112,54 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                     child: Storyline(),
                   ),
                   PhotoScroller(),
+                  SizedBox(height: 20.0),
+                  Center(
+                    child: Container(
+                      width: 200.0,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          color: Colors.blue,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.mapMarked,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 10.0),
+                              Text(
+                                'Take Me There',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                              ),
+                            ],
+                          ),
+                          onPressed: () => MapUtils.openMap(
+                            myLatitude: _currentPosition.latitude,
+                            myLongitude: _currentPosition.longitude,
+                            destinationLatitude: placedata.d.lat,
+                            destinationLongitude: placedata.d.long,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 24.0),
+                  //   child: RaisedButton(
+                  //     onPressed: () {},
+                  //     textColor: Colors.white,
+                  //     color: Colors.blueAccent,
+                  //     disabledColor: Colors.grey,
+                  //     disabledTextColor: Colors.white,
+                  //     highlightColor: Colors.orangeAccent,
+                  //     elevation: 4.0,
+                  //     child: Text('Take me there'),
+                  //   ),
+                  // ),
                   SizedBox(height: 20.0),
                   UserReview(id),
                 ],
