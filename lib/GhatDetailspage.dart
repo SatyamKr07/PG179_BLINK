@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:maps/Application.dart';
 import 'package:maps/alleventsdisplay.dart';
 import 'package:maps/locprovider.dart';
@@ -63,6 +64,7 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
     }
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text(AppTranslations.of(context).text("appbar_title")),
         actions: <Widget>[
           PopupMenuButton(
@@ -75,10 +77,10 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
               }
-              if (val == 2) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NearbyPlaces()));
-              }
+              // if (val == 2) {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => NearbyPlaces()));
+              // }
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
@@ -90,11 +92,11 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                 child: Text(AppTranslations.of(context).text("show_all")),
                 value: 1,
               ),
-              PopupMenuItem(
-                child:
-                    Text(AppTranslations.of(context).text("See Nearby places")),
-                value: 2,
-              ),
+              // PopupMenuItem(
+              //   child:
+              //       Text(AppTranslations.of(context).text("See Nearby places")),
+              //   value: 2,
+              // ),
             ],
           ),
         ],
@@ -113,39 +115,75 @@ class _GhatDetailsPageState extends State<GhatDetailsPage> {
                   ),
                   PhotoScroller(),
                   SizedBox(height: 20.0),
-                  Center(
-                    child: Container(
-                      width: 200.0,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0)),
-                          color: Colors.blue,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                FontAwesomeIcons.mapMarked,
-                                color: Colors.white,
+                  Column(
+                    children: <Widget>[
+                      Center(
+                        child: Container(
+                          width: 200.0,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
+                              color: Colors.blue,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(
+                                    FontAwesomeIcons.mapMarked,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  Text(
+                                    'Take Me There',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18.0),
+                                  ),
+                                ],
                               ),
-                              SizedBox(width: 10.0),
-                              Text(
-                                'Take Me There',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18.0),
+                              onPressed: () => MapUtils.openMap(
+                                myLatitude: _currentPosition.latitude,
+                                myLongitude: _currentPosition.longitude,
+                                destinationLatitude: placedata.d.lat,
+                                destinationLongitude: placedata.d.long,
                               ),
-                            ],
-                          ),
-                          onPressed: () => MapUtils.openMap(
-                            myLatitude: _currentPosition.latitude,
-                            myLongitude: _currentPosition.longitude,
-                            destinationLatitude: placedata.d.lat,
-                            destinationLongitude: placedata.d.long,
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      Center(
+                        child: Container(
+                          width: 250.0,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0)),
+                                color: Colors.purple,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.placeOfWorship,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 10.0),
+                                    Text(
+                                      'See nearby Places',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18.0),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Get.to(NearbyPlaces());
+                                }),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   // Padding(
                   //   padding: const EdgeInsets.only(left: 24.0),

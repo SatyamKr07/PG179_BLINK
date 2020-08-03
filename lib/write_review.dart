@@ -45,7 +45,7 @@ class _WriteReviewState extends State<WriteReview> {
 
   @override
   Widget build(BuildContext context) {
-    placedata=Provider.of<Places>(context,listen:false);
+    placedata = Provider.of<Places>(context, listen: false);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -66,43 +66,50 @@ class _WriteReviewState extends State<WriteReview> {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: RaisedButton(
-                  onPressed: () async{
-                    if(_image != null)
-                    {
-                      showDialog(context: context,
-                      builder: (_) => AlertDialog(
-                                  title: Text('Processing'),
-                                  content: CircularProgressIndicator()));
-    String fileName=DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference refernce=FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploasTask=refernce.putFile(_image);
-    StorageTaskSnapshot storageTaskSnapshot=await uploasTask.onComplete;
-    storageTaskSnapshot.ref.getDownloadURL().then((url) async{
-       
-                                String postid=DateTime.now().toString();  
-                                Firestore.instance.collection('BroadGeneral').document(postid).setData({
-                                  "id":placedata.u.userid, 
-                                  "ghatid":ghatid,
-                                  "image":url,
-                                  "name":placedata.u.username,
-                                  "photo":placedata.u.photourl,
-                                  "postid":postid,
-                                  "latitude":placedata.d.lat,
-                                  "longitude":placedata.d.long,
-                                  "date":DateTime.now(),
-                                  "review":review,
-                                  "rating":rating.toString(),
-                                   "upvotes":[]
-                                });
-                                
-                  Navigator.pop(context);
-                  showDialog(context: context,
-                  builder: (_) => AlertDialog(
-                                  title: Text('Thank You'),
-                                  content: Text('Your review has been successfully recorded'))
-                  );         
-      
-    });            
+                  onPressed: () async {
+                    if (_image != null) {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                              title: Text('Processing'),
+                              content: CircularProgressIndicator()));
+                      String fileName =
+                          DateTime.now().millisecondsSinceEpoch.toString();
+                      StorageReference refernce =
+                          FirebaseStorage.instance.ref().child(fileName);
+                      StorageUploadTask uploasTask = refernce.putFile(_image);
+                      StorageTaskSnapshot storageTaskSnapshot =
+                          await uploasTask.onComplete;
+                      storageTaskSnapshot.ref
+                          .getDownloadURL()
+                          .then((url) async {
+                        String postid = DateTime.now().toString();
+                        Firestore.instance
+                            .collection('BroadGeneral')
+                            .document(postid)
+                            .setData({
+                          "id": placedata.u.userid,
+                          "ghatid": ghatid,
+                          "image": url,
+                          "name": placedata.u.username,
+                          "photo": placedata.u.photourl,
+                          "postid": postid,
+                          "latitude": placedata.d.lat,
+                          "longitude": placedata.d.long,
+                          "date": DateTime.now(),
+                          "review": review,
+                          "rating": rating.toString(),
+                          "upvotes": []
+                        });
+
+                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                title: Text('Thank You'),
+                                content: Text(
+                                    'Your review has been successfully recorded')));
+                      });
                     }
                   },
                   textColor: Colors.white,
@@ -142,7 +149,7 @@ class _WriteReviewState extends State<WriteReview> {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (ratin) {
-                        rating=ratin;
+                        rating = ratin;
                       },
                     ),
                   ),
@@ -159,24 +166,24 @@ class _WriteReviewState extends State<WriteReview> {
           //   height: 20,
           // ),
           Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: _image == null
-                ? Center(
-                    child: new Text(
-                      'No Image Selected ',
-                      style: TextStyle(
-                          fontSize: 15,
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  )
-                : new Container(
-                  width:200,
-                  height:200,
-                  child:Image.file(_image,fit:BoxFit.cover)
-                )
-            //Image.file(imageFile,height: 200,width: 200,),
-          ),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              child: _image == null
+                  ? Center(
+                      child: new Text(
+                        'No Image Selected ',
+                        style: TextStyle(
+                            fontSize: 15,
+                            // fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    )
+                  : new Container(
+                      width: 200,
+                      height: 200,
+                      child: Image.file(_image, fit: BoxFit.cover))
+              //Image.file(imageFile,height: 200,width: 200,),
+              ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -201,18 +208,18 @@ class _WriteReviewState extends State<WriteReview> {
                     size: 40,
                   ),
                 ),
-                IconButton(
-                  onPressed: () async {
-                    await getImageFromGallery().then((value) {
-                      _image = _image;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.photo_library,
-                    color: Colors.black,
-                    size: 40,
-                  ),
-                ),
+                // IconButton(
+                //   onPressed: () async {
+                //     await getImageFromGallery().then((value) {
+                //       _image = _image;
+                //     });
+                //   },
+                //   icon: Icon(
+                //     Icons.photo_library,
+                //     color: Colors.black,
+                //     size: 40,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -256,7 +263,7 @@ class _WriteReviewState extends State<WriteReview> {
               ),
               onChanged: (val) {
                 // widget.onChanged(val);
-                review=val;
+                review = val;
               },
             ),
           ),

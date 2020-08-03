@@ -21,7 +21,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
 
   Position _currentPosition;
   String _currentAddress = '';
-  TextEditingController review=new TextEditingController();
+  TextEditingController review = new TextEditingController();
   final picker = ImagePicker();
 
   Future getImageFromCamera() async {
@@ -65,7 +65,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
 
   @override
   Widget build(BuildContext context) {
-    placedata=Provider.of<Places>(context,listen:false);
+    placedata = Provider.of<Places>(context, listen: false);
     return Scaffold(
         // appBar: AppBar(
         //   backgroundColor: Colors.blue[50],
@@ -134,7 +134,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Add image (optional)',
+                    'Add image (mandatory)',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -180,48 +180,51 @@ class _AddNewPlaceState extends State<AddNewPlace> {
               decoration: InputDecoration(
                 labelText: "Add description",
                 helperMaxLines: null,
-                
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 24),
             child: FlatButton(
-              onPressed: () async{
-                 showDialog(context: context,
-                      builder: (_) => AlertDialog(
-                                  title: Text('Processing'),
-                                  content: CircularProgressIndicator()));
-    String fileName=DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference refernce=FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploasTask=refernce.putFile(_image);
-    StorageTaskSnapshot storageTaskSnapshot=await uploasTask.onComplete;
-    storageTaskSnapshot.ref.getDownloadURL().then((url) async{
-       
-                                String postid=DateTime.now().toString();  
-                                Firestore.instance.collection('AddPlaces').document(postid).setData({
-                                  "id":placedata.u.userid, 
-                                  "image":url,
-                                  "name":placedata.u.username,
-                                  "photo":placedata.u.photourl,
-                                  "postid":postid,
-                                  "review":review.text,
-                                   "location":_currentAddress,
-                                   "date":DateTime.now(),
-                                   "reviewed":0,
-                                   "longlat":_currentPosition.toString()
+              onPressed: () async {
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                        title: Text('Processing'),
+                        content: CircularProgressIndicator()));
+                String fileName =
+                    DateTime.now().millisecondsSinceEpoch.toString();
+                StorageReference refernce =
+                    FirebaseStorage.instance.ref().child(fileName);
+                StorageUploadTask uploasTask = refernce.putFile(_image);
+                StorageTaskSnapshot storageTaskSnapshot =
+                    await uploasTask.onComplete;
+                storageTaskSnapshot.ref.getDownloadURL().then((url) async {
+                  String postid = DateTime.now().toString();
+                  Firestore.instance
+                      .collection('AddPlaces')
+                      .document(postid)
+                      .setData({
+                    "id": placedata.u.userid,
+                    "image": url,
+                    "name": placedata.u.username,
+                    "photo": placedata.u.photourl,
+                    "postid": postid,
+                    "review": review.text,
+                    "location": _currentAddress,
+                    "date": DateTime.now(),
+                    "reviewed": 0,
+                    "longlat": _currentPosition.toString()
+                  });
 
-                                });
-                                
                   Navigator.pop(context);
-                  showDialog(context: context,
-                  builder: (_) => AlertDialog(
-                                  title: Text('Thank You'),
-                                  content: Text('We hope that your data gets verified soon..and guess what add 20 points to your score:)'))
-                  );         
-      
-    });  
-
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                          title: Text('Thank You'),
+                          content: Text(
+                              'We hope that your data gets verified soon..and guess what add 20 points to your score:)')));
+                });
               },
               child: Text("Post for verification",
                   style: TextStyle(color: Colors.white)),

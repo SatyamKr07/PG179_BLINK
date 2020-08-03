@@ -24,6 +24,7 @@ class AppDrawer extends StatelessWidget {
         child: Column(
       children: <Widget>[
         AppBar(
+            backgroundColor: Colors.green,
             title: Text(AppTranslations.of(context).text("profile_details"))),
         Divider(),
         Column(children: <Widget>[
@@ -31,7 +32,7 @@ class AppDrawer extends StatelessWidget {
               height: 200,
               width: 200,
               decoration: BoxDecoration(
-                  color: Colors.brown, borderRadius: BorderRadius.circular(10)),
+                  color: Colors.green, borderRadius: BorderRadius.circular(10)),
               child: Column(children: <Widget>[
                 SizedBox(
                   height: 18,
@@ -53,18 +54,18 @@ class AppDrawer extends StatelessWidget {
                 Center(
                     child: Text(
                   u.username,
-                  style: TextStyle(color: Colors.yellowAccent, fontSize: 18),
+                  style: TextStyle(color: Colors.deepPurple, fontSize: 18),
                 )),
                 Divider(),
                 Center(
                     child: Text(
                   AppTranslations.of(context).text("points"),
-                  style: TextStyle(color: Colors.redAccent, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 )),
                 Center(
                     child: Text(
                   u.points.toString(),
-                  style: TextStyle(color: Colors.redAccent, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ))
               ]))
         ]),
